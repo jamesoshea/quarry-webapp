@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h2>What is your user id? (You can find it at the top of the extension popup)</h2>
-    <input v-model="userIdInput" type="text" @keydown="getUser" placeholder="User ID">
+    <h2>{{ question }}</h2>
+    <input v-if="question" v-model="userIdInput" type="text" @keydown="getUser" placeholder="User ID">
     <ul v-for="(scrape, index) in scrapes">
       <p @click="expandScrape(index)">{{scrape.url}}</p>
     </ul>
@@ -25,6 +25,7 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      question: 'What is your user id? (You can find it at the top of the extension popup)',
       userIdInput: null,
       scrapes: [],
       currentScrape: null
@@ -33,6 +34,7 @@ export default {
   methods: {
     getUser(event) {
       if (event.key == "Enter") {
+        const self = this
         axios.get('/users/' + this.userIdInput)
         .then((response)=> {
           console.log(response.data)
@@ -41,6 +43,7 @@ export default {
               this.scrapes.push(response.data[scrape])
             }
           }
+          self.question = null
         })
         .catch((error)=> {
           console.log(error)
@@ -48,7 +51,11 @@ export default {
       }
     },
     expandScrape(i) {
-      this.currentScrape = this.scrapes[i]
+      if(!this.currentScrape) {
+        this.currentScrape = this.scrapes[i]
+      } else {
+        this.currentScrape = null
+      }
     }
   }
 }
