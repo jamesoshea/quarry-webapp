@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{ question }}</p>
+    <h4 class="centre">{{ question }}</h4>
     <input class="form-input q-input-id" v-if="question" v-model="userIdInput" type="text" @keydown="getUser" placeholder="User ID">
     <div class="q-container">
       <ul v-for="(scrape, index) in scrapes">
@@ -8,12 +8,13 @@
       </ul>
       <hr>
       <div v-if="currentScrape">
+        <h5>URL:</h5>
         <p>{{currentScrape.url}}</p>
-        <p>{{currentScrape.timeStamp}}</p>
+        <p>{{Date(currentScrape.timeStamp).toLocaleString()}}</p>
         <table class="table table-striped table-hover q-table">
           <thead>
             <tr>
-              <th v-for="column in currentScrape.rows[0]">{{ column | capitalize }}</th>
+              <th v-for="column in currentScrape.rows[0]">{{ column }}</th>
             </tr>
           </thead>
           <tbody>
@@ -69,9 +70,6 @@ export default {
 </script>
 
 <style scoped>
-
-.q-container {
-}
 
 .q-input-id {
   width: 60%;
