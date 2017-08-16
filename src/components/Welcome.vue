@@ -2,15 +2,12 @@
   <div class="q-no-overflow">
     <div>
       <h4>Scrapes</h4>
-      <p class="centre">{{ question }}</p>
-      <input class="form-input q-input-id" v-if="question" v-model="userIdInput" type="text" @keydown="getUser" placeholder="User ID">
+      <div v-if="scrapes.length == 0">
+        <p class="centre">{{ question }}</p>
+        <input class="form-input q-input-id" v-if="question" v-model="userIdInput" type="text" @keydown="getUser" placeholder="User ID">
+      </div>
     </div>
-    <div class="q-scrape-list">
-      <dl v-for="(scrape, index) in scrapes">
-        <dt>{{ Date(scrape.timeStamp).toLocaleString() }}</dt>
-        <dd @click="expandScrape(index)">{{ scrape.url }}</dd>
-      </dl>
-    </div>
+    <scrape-list></scrape-list>
     <div class="divider"></div>
     <display-scrape></display-scrape>
   </div>
@@ -20,9 +17,11 @@
 import axios from 'axios'
 
 import DisplayScrape from './DisplayScrape.vue'
+import ScrapeList from './ScrapeList.vue'
 
 export default {
   components: {
+    'scrape-list': ScrapeList,
     'display-scrape': DisplayScrape
   },
   data() {
@@ -34,7 +33,7 @@ export default {
   computed: {
     userIdInput() {
       return this.$store.getters.userId || ''
-    }
+    },
   },
   methods: {
     getUser(event) {
@@ -48,6 +47,7 @@ export default {
             }
           }
           self.question = null
+          this.$store.commit('setScrapes', this.scrapes)
           this.$store.commit('setUser', this.userIdInput)
           localStorage.setItem('userId', this.userIdInput)
         })
@@ -56,25 +56,12 @@ export default {
           self.question = 'User not found'
         })
       }
-    },
-    expandScrape(i) {
-      if(!this.$store.getters.currentScrape) {
-        this.$store.commit('setCurrentScrape', this.scrapes[i])
-      } else {
-        this.$store.commit('setCurrentScrape', null)
-      }
     }
   }
 }
 </script>
 
 <style scoped>
-
-.q-scrape-list {
-  max-height: 200px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
 
 .q-no-overflow {
   overflow-x: hidden;

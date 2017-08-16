@@ -1,9 +1,8 @@
 <template lang="html">
   <div>
     <div v-if="currentScrape">
-      <h5>URL:</h5>
+      <h5>{{new Date(currentScrape.timeStamp).toLocaleString()}}</h5>
       <p>{{currentScrape.url}}</p>
-      <p>{{Date(currentScrape.timeStamp).toLocaleString()}}</p>
       <table class="table table-striped table-hover q-table">
         <thead>
           <tr>
