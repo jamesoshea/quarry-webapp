@@ -21,5 +21,10 @@ new Vue({
   el: '#app',
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  beforeMount() {
+    if (localStorage.getItem('userId')) {
+      store.commit('setUser', localStorage.getItem('userId'))
+    }
+  }
 })

@@ -8,7 +8,9 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-      userId: null
+      userId: '',
+      scrapes: null,
+      currentScrape: null
     },
     getters,
     mutations
