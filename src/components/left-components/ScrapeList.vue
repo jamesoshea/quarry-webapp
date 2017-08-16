@@ -7,7 +7,7 @@
         </div>
         <div class="column col-1" @click="toggleFavourite(index)">
           <i v-if="scrape.fav" class="icon icon-bookmark q-bookmark-active"></i>
-          <i v-else class="icon icon-bookmark"></i>
+          <i v-else class="icon icon-bookmark">hello</i>
         </div>
       </div>
       <dd class="q-fake-link" @click="expandScrape(index)">{{ scrape.url }}</dd>

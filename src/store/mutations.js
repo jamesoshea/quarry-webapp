@@ -11,18 +11,18 @@ export default {
     state.scrapes = scrapes
   },
   toggleScrapeFav(state, i) {
-    state.scrapes[i].fav = !state.scrapes[i].fav
-    setFirebaseFavourite(state.userId, state.scrapes[i].id, state.scrapes[i].fav)
+    let options = {
+      key: state.scrapes[i].id,
+      bool: !state.scrapes[i].fav
+    }
+    console.log(options)
+    axios.post('http://quarry-17.herokuapp.com/users/' + state.userId + '/setFav', options)
+    .then((response)=> {
+      console.log(response)
+      state.scrapes[i].fav = !state.scrapes[i].fav
+    })
+    .catch((error)=> {
+      console.log(error)
+    })
   }
-}
-
-function setFirebaseFavourite(userId, key, bool) {
-  let options = {
-    key,
-    bool
-  }
-  axios.post('http://quarry-17.herokuapp.com/users/' + userId + '/setFav', options)
-  .then((response)=> {
-    console.log(response.data)
-  })
 }
