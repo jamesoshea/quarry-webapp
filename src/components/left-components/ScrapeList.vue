@@ -1,7 +1,15 @@
 <template lang="html">
   <div class="q-scrape-list">
     <dl v-for="(scrape, index) in scrapes">
-      <dt>{{ new Date(scrape.timeStamp).toLocaleString() }}</dt>
+      <div class="columns">
+        <div class="column col-11">
+          <dt>{{ new Date(scrape.timeStamp).toLocaleString() }}</dt>
+        </div>
+        <div class="column col-1" @click="toggleFavourite(index)">
+          <i v-if="scrape.fav" class="icon icon-bookmark q-bookmark-active"></i>
+          <i v-else class="icon icon-bookmark"></i>
+        </div>
+      </div>
       <dd @click="expandScrape(index)">{{ scrape.url }}</dd>
     </dl>
   </div>
@@ -11,7 +19,6 @@
 export default {
   data() {
     return {
-
     }
   },
   computed: {
@@ -26,6 +33,9 @@ export default {
       } else {
         this.$store.commit('setCurrentScrape', null)
       }
+    },
+    toggleFavourite(i) {
+      this.$store.commit('toggleScrapeFav', i)
     }
   }
 }
@@ -37,6 +47,10 @@ export default {
   max-height: 200px;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+.q-bookmark-active {
+  color: gold;
 }
 
 </style>
