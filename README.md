@@ -1,18 +1,7 @@
-# quarry-webapp
+# Quarry
 
-> Vue webapp for Quarry extension
+Vue webapp for the Quarry data mining extension.
 
-## Build Setup
+Available at http://quarrytheapp.surge.sh
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+Get the extension in the [chrome web store](https://chrome.google.com/webstore/search/quarry)

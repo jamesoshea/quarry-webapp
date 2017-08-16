@@ -4,12 +4,12 @@ import VueRouter from 'vue-router'
 import { store } from './store/store'
 
 import App from './App.vue'
-import Welcome from './components/Welcome.vue'
+import Left from './components/Left.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', component: Welcome }
+  { path: '/', component: Left }
 ]
 
 const router = new VueRouter({

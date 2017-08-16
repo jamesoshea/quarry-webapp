@@ -10,11 +10,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="row in currentScrape.rows.slice(2, currentScrape.rows.length)">
+          <tr v-for="row in currentScrape.rows.slice(2, currentScrape.rows.length).reverse()">
             <td v-for="item in row">{{ item }}</td>
           </tr>
         </tbody>
       </table>
+    </div>
+    <div v-else>
+      <h5 v-if="scrapes">Select a scrape by clicking its URL above</h5>
     </div>
   </div>
 </template>
@@ -28,6 +31,9 @@ export default {
   computed: {
     currentScrape() {
       return this.$store.getters.currentScrape
+    },
+    scrapes() {
+      return this.$store.getters.scrapes
     }
   },
   methods: {

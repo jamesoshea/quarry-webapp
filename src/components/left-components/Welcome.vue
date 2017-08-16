@@ -1,37 +1,28 @@
-<template>
-  <div class="q-no-overflow">
-    <div>
-      <h4>Scrapes</h4>
-      <div v-if="scrapes.length == 0">
-        <p class="centre">{{ question }}</p>
-        <input class="form-input q-input-id" v-if="question" v-model="userIdInput" type="text" @keydown="getUser" placeholder="User ID">
-      </div>
+<template lang="html">
+  <div>
+    <h4>Scrapes</h4>
+    <div v-if="scrapes.length == 0">
+      <p class="centre">{{ question }}</p>
+      <input  class="form-input q-input-id"
+              v-if="question"
+              v-model="userIdInput"
+              type="text"
+              @keydown="getUser"
+              placeholder="User ID" autofocus>
     </div>
-    <scrape-list></scrape-list>
-    <div class="divider"></div>
-    <display-scrape></display-scrape>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 
-import DisplayScrape from './DisplayScrape.vue'
-import ScrapeList from './ScrapeList.vue'
-
 export default {
-  components: {
-    'scrape-list': ScrapeList,
-    'display-scrape': DisplayScrape
-  },
   data() {
     return {
       userIdInput: '',
       question: 'What is your user id? (You can find it at the top of the extension popup)',
       scrapes: []
     }
-  },
-  computed: {
   },
   methods: {
     getUser(event) {
@@ -66,19 +57,5 @@ export default {
 }
 </script>
 
-<style scoped>
-
-.q-no-overflow {
-  overflow-x: hidden;
-}
-
-.q-input-id {
-  width: 60%;
-}
-
-.q-table {
-  width: 90%;
-  margin: auto;
-}
-
+<style lang="css">
 </style>
