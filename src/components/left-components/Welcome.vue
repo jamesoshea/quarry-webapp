@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <h4>Scrapes</h4>
-    <div v-if="scrapes.length == 0">
+    <div v-if="!Object.keys(scrapes).length">
       <p class="centre">{{ question }}</p>
       <input  class="form-input q-input-id"
               v-if="question"
@@ -21,7 +21,7 @@ export default {
     return {
       userIdInput: '',
       question: 'What is your user id? (You can find it at the top of the extension popup)',
-      scrapes: []
+      scrapes: {}
     }
   },
   methods: {
@@ -29,12 +29,11 @@ export default {
       if (event.key == "Enter") {
         const self = this
         let getString = 'https://quarry-17.herokuapp.com/users/' + self.userIdInput
-        console.log(getString)
         axios.get(getString)
         .then((response)=> {
           for(var scrape in response.data) {
             if (response.data.hasOwnProperty(scrape)) {
-              this.scrapes.push(response.data[scrape])
+              this.scrapes[scrape] = response.data[scrape]
             }
           }
           self.question = null

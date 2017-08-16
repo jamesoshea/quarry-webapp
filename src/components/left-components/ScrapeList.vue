@@ -1,16 +1,16 @@
 <template lang="html">
   <div class="q-scrape-list">
-    <dl v-for="(scrape, index) in scrapes">
+    <dl v-for="(scrape, key) in scrapes">
       <div class="columns">
         <div class="column col-11">
           <dt>{{ new Date(scrape.timeStamp).toLocaleString() }}</dt>
         </div>
-        <div class="column col-1" @click="toggleFavourite(index)">
-          <i v-if="scrape.fav" class="icon icon-bookmark q-bookmark-active"></i>
+        <div class="column col-1" @click="toggleFavourite(key)">
+          <i v-if="scrapes[key].fav" class="icon icon-bookmark q-bookmark-active"></i>
           <i v-else class="icon icon-bookmark"></i>
         </div>
       </div>
-      <dd @click="expandScrape(index)">{{ scrape.url }}</dd>
+      <dd @click="expandScrape(key)">{{ scrape.url }}</dd>
     </dl>
   </div>
 </template>
@@ -27,15 +27,15 @@ export default {
     }
   },
   methods: {
-    expandScrape(i) {
+    expandScrape(key) {
       if(!this.$store.getters.currentScrape) {
-        this.$store.commit('setCurrentScrape', this.scrapes[i])
+        this.$store.commit('setCurrentScrape', this.scrapes[key])
       } else {
         this.$store.commit('setCurrentScrape', null)
       }
     },
-    toggleFavourite(i) {
-      this.$store.commit('toggleScrapeFav', i)
+    toggleFavourite(key) {
+      this.$store.commit('toggleScrapeFav', key)
     }
   }
 }

@@ -9,7 +9,7 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
       userId: '',
-      scrapes: [],
+      scrapes: {},
       currentScrape: null
     },
     getters,

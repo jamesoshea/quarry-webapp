@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export default {
   setUser(state, userId) {
     state.userId = userId
@@ -8,10 +10,19 @@ export default {
   setScrapes(state, scrapes) {
     state.scrapes = scrapes
   },
-  toggleScrapeFav(state, i) {
-    state.scrapes[i].fav = !state.scrapes[i].fav
-  },
-  unFavourite(state, i) {
-    state.scrapes[i].fav = false
+  toggleScrapeFav(state, key) {
+    state.scrapes[key].fav = !state.scrapes[key].fav
+    setFirebaseFavourite(state, key, state.scrapes[key].fav)
   }
+}
+
+function setFirebaseFavourite(state, key, bool) {
+  let options = {
+    key: key,
+    value: bool
+  }
+  axios.post('http://quarry-17.herokuapp.com/users/' + state.userId + '/setFav', options)
+  .then((response)=> {
+    console.log(response.data)
+  })
 }
