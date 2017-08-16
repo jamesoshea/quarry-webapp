@@ -39,7 +39,7 @@ export default {
     getUser(event) {
       if (event.key == "Enter") {
         const self = this
-        axios.get('/users/' + this.userIdInput)
+        axios.get('https://quarry-17.herokuapp.com/users/' + this.userIdInput)
         .then((response)=> {
           for(var scrape in response.data) {
             if (response.data.hasOwnProperty(scrape)) {
