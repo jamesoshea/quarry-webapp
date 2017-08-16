@@ -26,14 +26,12 @@ export default {
   },
   data() {
     return {
+      userIdInput: '',
       question: 'What is your user id? (You can find it at the top of the extension popup)',
       scrapes: []
     }
   },
   computed: {
-    userIdInput() {
-      return this.$store.getters.userId || ''
-    },
   },
   methods: {
     getUser(event) {
@@ -58,6 +56,11 @@ export default {
           self.question = 'User not found'
         })
       }
+    }
+  },
+  beforeMount() {
+    if(localStorage.getItem('userId')) {
+      this.userIdInput = localStorage.getItem('userId')
     }
   }
 }
