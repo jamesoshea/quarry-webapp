@@ -1,22 +1,29 @@
 <template>
   <div>
-    <h2>{{ question }}</h2>
-    <input v-if="question" v-model="userIdInput" type="text" @keydown="getUser" placeholder="User ID">
-    <ul v-for="(scrape, index) in scrapes">
-      <p @click="expandScrape(index)">{{scrape.url}}</p>
-    </ul>
-    <hr>
-    <div v-if="currentScrape">
-      <p>{{currentScrape.url}}</p>
-      <p>{{currentScrape.timeStamp}}</p>
-      <ul v-for="row in currentScrape">
-        {{row}}
+    <p>{{ question }}</p>
+    <input class="form-input q-input-id" v-if="question" v-model="userIdInput" type="text" @keydown="getUser" placeholder="User ID">
+    <div class="q-container">
+      <ul v-for="(scrape, index) in scrapes">
+        <li @click="expandScrape(index)">{{scrape.url}}</li>
       </ul>
+      <hr>
+      <div v-if="currentScrape">
+        <p>{{currentScrape.url}}</p>
+        <p>{{currentScrape.timeStamp}}</p>
+        <table class="table table-striped table-hover q-table">
+          <thead>
+            <tr>
+              <th v-for="column in currentScrape.rows[0]">{{ column | capitalize }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="row in currentScrape.rows.slice(2, currentScrape.rows.length)">
+              <td v-for="item in row">{{ item }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <ul v-for="">
-
-    </ul>
-
   </div>
 </template>
 
@@ -62,5 +69,17 @@ export default {
 </script>
 
 <style scoped>
+
+.q-container {
+}
+
+.q-input-id {
+  width: 60%;
+}
+
+.q-table {
+  width: 90%;
+  margin: auto;
+}
 
 </style>

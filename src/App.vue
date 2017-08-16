@@ -1,7 +1,15 @@
 <template>
   <div id="app">
-    <h1>{{ msg }}</h1>
-    <router-view></router-view>
+    <div class="columns">
+      <div class="column col-10">
+        <h3 id="q-main-msg">{{msg}}</h3>
+        <router-view>
+        </router-view>
+      </div>
+      <div class="column col-2">
+        <h3>Favourites</h3>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -10,7 +18,7 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Quarry'
+      msg: 'Quarry'
     }
   },
   methods: {
@@ -18,31 +26,10 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+<style scoped>
+
+#q-main-msg {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
 </style>
