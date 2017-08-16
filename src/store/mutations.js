@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export default {
   setUser(state, userId) {
     state.userId = userId
@@ -10,8 +12,17 @@ export default {
   },
   toggleScrapeFav(state, i) {
     state.scrapes[i].fav = !state.scrapes[i].fav
-  },
-  unFavourite(state, i) {
-    state.scrapes[i].fav = false
+    setFirebaseFavourite(state.userId, state.scrapes[i].id, state.scrapes[i].fav)
   }
+}
+
+function setFirebaseFavourite(userId, key, bool) {
+  let options = {
+    key,
+    bool
+  }
+  axios.post('http://localhost:3000/users/' + userId + '/setFav', options)
+  .then((response)=> {
+    console.log(response.data)
+  })
 }

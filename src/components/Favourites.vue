@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     unFavourite(i) {
-      this.$store.commit('unFavourite', i)
+      this.$store.commit('toggleScrapeFav', i)
     }
   }
 }

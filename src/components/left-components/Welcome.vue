@@ -29,12 +29,18 @@ export default {
       if (event.key == "Enter") {
         const self = this
         let getString = 'https://quarry-17.herokuapp.com/users/' + self.userIdInput
-        console.log(getString)
         axios.get(getString)
         .then((response)=> {
           for(var scrape in response.data) {
             if (response.data.hasOwnProperty(scrape)) {
-              this.scrapes.push(response.data[scrape])
+              let obj = {
+                id: scrape,
+                fav: response.data[scrape].fav,
+                timeStamp: response.data[scrape].timeStamp,
+                rows: response.data[scrape].rows,
+                url: response.data[scrape].url
+              }
+              this.scrapes.push(obj)
             }
           }
           self.question = null
