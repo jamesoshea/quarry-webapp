@@ -10,7 +10,7 @@
           <i v-else class="icon icon-bookmark"></i>
         </div>
       </div>
-      <dd @click="expandScrape(index)">{{ scrape.url }}</dd>
+      <dd class="q-fake-link" @click="expandScrape(index)">{{ scrape.url }}</dd>
     </dl>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     expandScrape(i) {
-      if(!this.$store.getters.currentScrape) {
+      if (!this.$store.getters.currentScrape || this.$store.getters.currentScrape.id !== this.scrapes[i].id) {
         this.$store.commit('setCurrentScrape', this.scrapes[i])
       } else {
         this.$store.commit('setCurrentScrape', null)
@@ -50,6 +50,14 @@ export default {
 }
 
 .q-bookmark-active {
+  color: gold;
+}
+
+.q-fake-link {
+  cursor: pointer;
+}
+
+.q-fake-link:hover {
   color: gold;
 }
 

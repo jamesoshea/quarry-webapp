@@ -21,7 +21,7 @@ function setFirebaseFavourite(userId, key, bool) {
     key,
     bool
   }
-  axios.post('http://localhost:3000/users/' + userId + '/setFav', options)
+  axios.post('http://quarry-17.herokuapp.com/users/' + userId + '/setFav', options)
   .then((response)=> {
     console.log(response.data)
   })
