@@ -10,7 +10,7 @@
           <i v-if="scrape.fav" class="icon icon-cross"></i>
         </div>
       </div>
-      <dd>{{ scrape.url }}</dd>
+      <dd class="text-ellipsis">{{ scrape.url }}</dd>
     </dl>
   </div>
 </template>

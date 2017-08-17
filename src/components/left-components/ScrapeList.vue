@@ -10,7 +10,7 @@
           <i v-else class="icon icon-bookmark">hello</i>
         </div>
       </div>
-      <dd class="q-fake-link" @click="expandScrape(index)">{{ scrape.url }}</dd>
+      <dd class="q-fake-link text-ellipsis" @click="expandScrape(index)">{{ scrape.url }}</dd>
     </dl>
   </div>
 </template>

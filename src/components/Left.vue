@@ -24,10 +24,6 @@ export default {
 
 <style scoped>
 
-.q-no-overflow {
-  overflow-x: hidden;
-}
-
 .q-input-id {
   width: 60%;
 }

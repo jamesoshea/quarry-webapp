@@ -31,6 +31,10 @@ export default {
 
 <style scoped>
 
+body {
+  background-color: #eee;
+}
+
 #app {
   width: 80%;
   margin: auto;

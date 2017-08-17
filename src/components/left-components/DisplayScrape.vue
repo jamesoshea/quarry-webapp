@@ -2,7 +2,7 @@
   <div class="q-scrape-main">
     <div v-if="currentScrape">
       <h5 class="centre">{{new Date(currentScrape.timeStamp).toLocaleString()}}</h5>
-      <p>{{currentScrape.url}}</p>
+      <p class="text-ellipsis">{{currentScrape.url}}</p>
       <p class="centre">Export as:
         <input class="form-input centre" v-model="filename" placeholder="Filename">
         <span class="q-fake-link" @click="exportFile(currentScrape.rows, 'csv')">CSV</span> |
@@ -11,7 +11,11 @@
       <table class="table table-striped table-hover q-table">
         <thead>
           <tr>
-            <th v-for="(column, index) in currentScrape.rows[0]">{{ column }} ({{ currentScrape.rows[1][index] }})</th>
+            <th v-for="(column, index) in currentScrape.rows[0]">
+              {{ column }} ({{ currentScrape.rows[1][index] }})<br>
+              <i class="icon icon-arrow-up q-hover-active" @click="sortRows('asc', index)"></i>
+              <i class="icon icon-arrow-down q-hover-active" @click="sortRows('desc', index)"></i>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -93,6 +97,24 @@ export default {
           document.body.removeChild(link)
         }
       }
+    },
+    sortRows(dir, i) {
+      let result = []
+      result[0] = this.currentScrape.rows[0]
+      result[1] = this.currentScrape.rows[1]
+      let len = this.currentScrape.rows.length
+      let input = this.currentScrape.rows.slice(2, len)
+      let output = input.sort((a, b)=> {
+        if (dir === 'asc') {
+          return a - b
+        } else if (dir === 'desc') {
+          return a + b
+        }
+      })
+      for (var i = 0; i < output.length; i++) {
+        result[i + 2] = output[i]
+      }
+      this.currentScrape.rows = result
     }
   }
 }
@@ -110,6 +132,10 @@ export default {
 
 .q-fake-link {
   cursor: pointer;
+}
+
+.q-hover-active:hover {
+  color: gold;
 }
 
 </style>
