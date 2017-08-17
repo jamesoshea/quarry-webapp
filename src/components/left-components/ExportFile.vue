@@ -1,18 +1,28 @@
 <template lang="html">
-  <p class="centre">Export as:
-    <input ref="filename"
-      class="form-input centre q-filename-form"
-      v-model="filename"
-      placeholder="Filename"
-      v-focus>
-    <span class="q-fake-link" @click="exportFile(currentScrape.rows, 'csv')">CSV</span> |
-    <span class="q-fake-link" @click="exportFile(currentScrape.rows, 'tsv')">TSV</span> |
-    <span class="q-fake-link" @click="exportJSON()">JSON</span>
-  </p>
+  <form class="form-horizontal">
+    <div class="form-group">
+      <div class="col-3 q-text-right">
+        <label class="form-label" for="input-example-1">Export as:</label>
+      </div>
+      <div class="col-6">
+        <input ref="filename"
+          class="form-input centre q-filename-form"
+          v-model="filename"
+          placeholder="Filename"
+          v-focus>
+      </div>
+      <div class="col-3 q-output-format">
+        <label class="form-label" for="input-example-1">
+          <span class="q-fake-link" @click="exportFile(currentScrape.rows, 'csv')">.CSV</span> |
+          <span class="q-fake-link" @click="exportFile(currentScrape.rows, 'tsv')">TSV</span> |
+          <span class="q-fake-link" @click="exportJSON()">JSON</span>
+        </label>
+      </div>
+    </div>
+  </form>
 </template>
 
 <script>
-
 const focus = {
    inserted(el) {
      el.focus()
@@ -32,6 +42,10 @@ export default {
   },
   methods: {
     exportFile(rows, format) {
+      if (!this.filename) {
+        alert('Please enter a filename.')
+        return
+      }
       let processRow = function (row) {
         let finalVal = ''
         for (let j = 0; j < row.length; j++) {
@@ -83,9 +97,12 @@ export default {
       }
     },
     exportJSON() {
+      if (!this.filename) {
+        alert('Please enter a filename.')
+        return
+      }
       let filename = this.filename += '.json'
-      let str = JSON.stringify(this.currentScrape)
-      console.log(typeof str)
+      let str = JSON.stringify(this.currentScrape.rows)
       const blob = new Blob([str], { type: 'application/json' })
       if (navigator.msSaveBlob) { // IE 10+
         navigator.msSaveBlob(blob, filename)
@@ -110,7 +127,16 @@ export default {
 
 <style>
 .q-filename-form {
-  width: 40%;
-  margin: auto;
+  /*width: 40%;
+  margin: auto;*/
+}
+
+.q-text-right {
+  text-align: right;
+  margin-right: 1.5rem;
+}
+
+.q-output-format {
+  margin-left: 1.5rem;
 }
 </style>
