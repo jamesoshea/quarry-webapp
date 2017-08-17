@@ -10,7 +10,7 @@
           <i v-if="scrape.fav" class="icon icon-cross"></i>
         </div>
       </div>
-      <dd class="text-ellipsis">{{ scrape.url }}</dd>
+      <dd class="q-fake-link text-ellipsis" @click="findFav(scrape.id)">{{ scrape.url }}</dd>
     </dl>
   </div>
 </template>
@@ -22,15 +22,30 @@ export default {
       return this.$store.getters.scrapes.filter((scrape)=>{
         return scrape.fav == true
       })
+    },
+    scrapes() {
+      return this.$store.getters.scrapes
     }
   },
   methods: {
     unFavourite(i) {
       this.$store.commit('toggleScrapeFav', i)
+    },
+    findFav(id) {
+      this.$store.commit('setCurrentScrape', this.scrapes.find(x => x.id === id))
     }
   }
 }
 </script>
 
 <style lang="css">
+
+.q-fake-link {
+  cursor: pointer;
+}
+
+.q-hover-active:hover {
+  color: gold;
+}
+
 </style>
