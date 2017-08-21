@@ -2,7 +2,7 @@
   <form class="form-horizontal">
     <div class="form-group">
       <div class="col-3 q-text-right">
-        <label class="form-label" for="input-example-1">Export as:</label>
+        <label class="form-label" for="input-example-1">Save as:</label>
       </div>
       <div class="col-6">
         <input ref="filename"
