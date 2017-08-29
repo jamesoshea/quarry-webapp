@@ -78,9 +78,9 @@ export default {
       this.currentScrape.rows = result
     },
     rerun(id) {
-      axios.get('/rerun/' + this.$store.getters.userId + '/' + this.currentScrape.id)
+      axios.get('http://quarry-17.herokuapp.com/rerun/' + this.$store.getters.userId + '/' + this.currentScrape.id)
       .then(function (response) {
-        console.log(response);
+        console.log(response.data)
       })
       .catch(function (error) {
         console.log(error);
