@@ -1,7 +1,17 @@
 <template lang="html">
   <div class="q-scrape-main">
     <div v-if="currentScrape">
-      <h5 class="centre">{{new Date(currentScrape.timeStamp).toLocaleString()}}</h5>
+      <div class="columns">
+        <div class="column col-4">
+
+        </div>
+        <div class="column col-4">
+          <h5 class="centre">{{new Date(currentScrape.timeStamp).toLocaleString()}}</h5>
+        </div>
+        <div class="column col-4">
+          <button class="btn centre"  @click="rerun(currentScrape.id)" name="button">Run Again</button>
+        </div>
+      </div>
       <p class="text-ellipsis">{{currentScrape.url}}</p>
       <export-file></export-file>
       <table class="table table-striped table-hover q-table">
@@ -28,7 +38,7 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 import ExportFile from './ExportFile.vue'
 
 export default {
@@ -66,6 +76,15 @@ export default {
         result[i + 2] = output[i]
       }
       this.currentScrape.rows = result
+    },
+    rerun(id) {
+      axios.get('/rerun/' + this.$store.getters.userId + '/' + this.currentScrape.id)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
   }
 }

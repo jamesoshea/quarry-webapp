@@ -43,7 +43,8 @@ module.exports = {
     noInfo: true,
     proxy: {
       '/test': 'http://localhost:3000',
-      '/users': 'http://localhost:3000'
+      '/users': 'http://localhost:3000',
+      '/rerun': 'http://localhost:3000'
     }
   },
   performance: {
