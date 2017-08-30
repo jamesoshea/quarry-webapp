@@ -5,11 +5,11 @@
         <div class="column col-4">
 
         </div>
-        <div class="column col-4">
+        <div class="column col-4 q-time-bar">
           <h5 class="centre">{{new Date(currentScrape.timeStamp).toLocaleString()}}</h5>
         </div>
         <div class="column col-4">
-          <button class="btn centre"  @click="rerun(currentScrape.id)" name="button">Run Again</button>
+          <button class="btn centre q-action-button"  @click="rerun(currentScrape.id)" name="button">Run Again</button>
         </div>
       </div>
       <p class="text-ellipsis">{{currentScrape.url}}</p>
@@ -19,8 +19,14 @@
           <tr>
             <th v-for="(column, index) in currentScrape.rows[0]">
               <div class="text-break">{{ column }} ({{ currentScrape.rows[1][index] }})</div>
-              <i class="icon icon-arrow-up q-hover-active" @click="sortRows('asc', index)"></i>
-              <i class="icon icon-arrow-down q-hover-active" @click="sortRows('desc', index)"></i>
+              <div class="columns">
+                <div class="column col-1 tooltip tooltip-left" data-tooltip="Sort Ascending">
+                  <i class="icon icon-arrow-up q-hover-active" @click="sortRows('asc', index)"></i>
+                </div>
+                <div class="column col-1 tooltip tooltip-left" data-tooltip="Sort Descending">
+                  <i class="icon icon-arrow-down q-hover-active" @click="sortRows('desc', index)"></i>
+                </div>
+              </div>
             </th>
           </tr>
         </thead>
@@ -98,6 +104,21 @@ export default {
 
 .centre {
   text-align: center;
+}
+
+.q-time-bar {
+  padding-top: 0.25rem;
+}
+
+.q-action-button {
+  border-color: #000;
+  color: #000;
+}
+
+.q-action-button:hover {
+  border-color: gold;
+  background-color: #FFF;
+  color: #000;
 }
 
 .q-fake-link {
