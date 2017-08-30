@@ -2,12 +2,17 @@
   <div class="q-scrape-list">
     <dl v-for="(scrape, index) in scrapes">
       <div class="columns">
-        <div class="column col-11">
+        <div class="column col-10">
           <dt>{{ new Date(scrape.timeStamp).toLocaleString() }}</dt>
         </div>
-        <div class="column col-1" @click="toggleFavourite(index)">
-          <i v-if="scrape.fav" class="icon icon-bookmark q-bookmark-active"></i>
-          <i v-else class="icon icon-bookmark">hello</i>
+        <div class="column col-1 tooltip tooltip-left" data-tooltip="Delete">
+          <i class="icon icon-delete q-list-icon"></i>
+        </div>
+        <div class="column col-1 tooltip tooltip-left" data-tooltip="Un/favourite">
+          <i  v-if="scrape.fav"
+              class="icon icon-bookmark q-bookmark-active q-list-icon"
+              @click="toggleFavourite(index)"></i>
+          <i v-else class="icon icon-bookmark q-list-icon" @click="toggleFavourite(index)">hello</i>
         </div>
       </div>
       <dd class="q-fake-link text-ellipsis" @click="expandScrape(index)">{{ scrape.url }}</dd>
@@ -55,6 +60,10 @@ export default {
 
 .q-bookmark-active {
   color: gold;
+}
+
+.q-list-icon {
+  margin-left: 0.5rem;
 }
 
 .q-fake-link {

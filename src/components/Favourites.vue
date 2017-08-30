@@ -6,7 +6,7 @@
         <div class="column col-10">
           <dt>{{ new Date(scrape.timeStamp).toLocaleString() }}</dt>
         </div>
-        <div class="column col-2" @click="unFavourite(index)">
+        <div class="column col-2 tooltip tooltip-left" data-tooltip="Unfavourite" @click="unFavourite(index)">
           <i v-if="scrape.fav" class="icon icon-cross"></i>
         </div>
       </div>
