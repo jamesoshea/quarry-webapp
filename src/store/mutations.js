@@ -15,10 +15,8 @@ export default {
       key: state.scrapes[i].id,
       bool: !state.scrapes[i].fav
     }
-    console.log(options)
     axios.post('http://quarry-17.herokuapp.com/users/' + state.userId + '/setFav', options)
     .then((response)=> {
-      console.log(response)
       state.scrapes[i].fav = !state.scrapes[i].fav
     })
     .catch((error)=> {
