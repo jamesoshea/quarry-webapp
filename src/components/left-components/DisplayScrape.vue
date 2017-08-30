@@ -38,7 +38,7 @@
       </table>
     </div>
     <div v-else>
-      <h5 v-if="scrapes">Select a scrape by clicking its URL above</h5>
+      <h5 v-if="scrapes.length">Select a scrape by clicking its URL above</h5>
     </div>
   </div>
 </template>
@@ -75,7 +75,7 @@ export default {
         if (dir === 'asc') {
           return a[i] - b[i]
         } else if (dir === 'desc') {
-          return a[i] + b[i]
+          return b[i] - a[i]
         }
       })
       for (var i = 0; i < output.length; i++) {
