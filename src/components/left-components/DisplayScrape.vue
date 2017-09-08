@@ -73,9 +73,9 @@ export default {
       let input = this.currentScrape.rows.slice(2, len)
       let output = input.sort((a, b)=> {
         if (dir === 'asc') {
-          return a[i] - b[i]
+          return a[i].toLowerCase() - b[i].toLowerCase()
         } else if (dir === 'desc') {
-          return b[i] - a[i]
+          return b[i].toLowerCase() - a[i].toLowerCase()
         }
       })
       for (var i = 0; i < output.length; i++) {
@@ -84,9 +84,12 @@ export default {
       this.currentScrape.rows = result
     },
     rerun(id) {
+      const self = this
       axios.get('http://quarry-17.herokuapp.com/rerun/' + this.$store.getters.userId + '/' + this.currentScrape.id)
       .then(function (response) {
-        console.log(response.data)
+        console.log(response.data, self.scrapes)
+        self.scrapes.push(response.data)
+        self.$store.commit('setScrapes', self.scrapes)
       })
       .catch(function (error) {
         console.log(error);
@@ -116,6 +119,7 @@ export default {
 }
 
 .q-action-button:hover {
+  transform: scale(1.1);
   border-color: gold;
   background-color: #FFF;
   color: #000;
