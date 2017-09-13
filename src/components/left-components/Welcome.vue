@@ -39,23 +39,8 @@ export default {
         let getString = 'https://quarry-17.herokuapp.com/users/' + self.userIdInput
         axios.get(getString)
         .then((response)=> {
-          for(var scrape in response.data) {
-            if (response.data.hasOwnProperty(scrape)) {
-              let obj = {
-                id: scrape,
-                fav: response.data[scrape].fav,
-                timeStamp: response.data[scrape].timeStamp,
-                rows: response.data[scrape].rows,
-                url: response.data[scrape].url
-              }
-              this.scrapes.push(obj)
-            }
-          }
-          this.scrapes.sort((a, b)=> {
-            return b.timeStamp - a.timeStamp
-          })
           self.question = null
-          this.$store.commit('setScrapes', this.scrapes)
+          this.$store.commit('setScrapes', response.data)
           this.$store.commit('setUser', this.userIdInput)
           localStorage.setItem('userId', this.userIdInput)
         })

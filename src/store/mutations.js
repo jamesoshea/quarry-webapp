@@ -7,7 +7,24 @@ export default {
   setCurrentScrape(state, scrape) {
     state.currentScrape = scrape
   },
-  setScrapes(state, scrapes) {
+  setScrapes(state, response) {
+    let scrapes = []
+    for(var scrape in response) {
+      if (response.hasOwnProperty(scrape)) {
+        let obj = {
+          id: scrape,
+          fav: response[scrape].fav,
+          timeStamp: response[scrape].timeStamp,
+          rows: response[scrape].rows,
+          url: response[scrape].url
+        }
+        scrapes.push(obj)
+      }
+    }
+    scrapes.sort((a, b)=> {
+      return b.timeStamp - a.timeStamp
+    })
+    console.log(scrapes)
     state.scrapes = scrapes
   },
   toggleScrapeFav(state, i) {

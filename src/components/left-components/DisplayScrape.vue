@@ -85,12 +85,10 @@ export default {
     },
     rerun(id) {
       const self = this
-     axios.get('http://quarry-17.herokuapp.com/scrapes/rerun/' + this.$store.getters.userId + '/' + this.currentScrape.id)
-//      axios.get('http://localhost:3000/scrapes/rerun/' + this.$store.getters.userId + '/' + this.currentScrape.id)
+//     axios.get('http://quarry-17.herokuapp.com/scrapes/rerun/' + this.$store.getters.userId + '/' + this.currentScrape.id)
+      axios.get('http://localhost:3000/scrapes/rerun/' + this.$store.getters.userId + '/' + this.currentScrape.id)
       .then(function (response) {
-        console.log(response.data, self.scrapes)
-        self.scrapes.push(response.data)
-        self.$store.commit('setScrapes', self.scrapes)
+        self.$store.commit('setScrapes', response.data)
       })
       .catch(function (error) {
         console.log(error);

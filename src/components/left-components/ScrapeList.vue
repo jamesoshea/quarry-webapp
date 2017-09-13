@@ -6,7 +6,8 @@
           <dt>{{ new Date(scrape.timeStamp).toLocaleString() }}</dt>
         </div>
         <div class="column col-1 tooltip tooltip-left" data-tooltip="Delete">
-          <i class="icon icon-delete q-list-icon"></i>
+          <i  class="icon icon-delete q-list-icon"
+              @click="deleteScrape(index)"></i>
         </div>
         <div class="column col-1 tooltip tooltip-left" data-tooltip="Un/favourite">
           <i  v-if="scrape.fav"
@@ -22,7 +23,7 @@
 
 <script>
 
-import { EventBus } from '../../main.js';
+import axios from 'axios'
 
 export default {
   data() {
@@ -44,6 +45,17 @@ export default {
     },
     toggleFavourite(i) {
       this.$store.commit('toggleScrapeFav', i)
+    },
+    deleteScrape(i) {
+      const self = this
+      let getString = 'http://localhost:3000/scrapes/delete/' + this.$store.getters.userId + '/' + this.scrapes[i].id
+      axios.post(getString)
+        .then((response) => {
+          self.$store.commit('setScrapes', response.data)
+        })
+        .catch((error) => {
+          console.log(error.message)
+        })
     }
   }
 }
