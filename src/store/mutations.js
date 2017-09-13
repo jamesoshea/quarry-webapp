@@ -24,8 +24,14 @@ export default {
     scrapes.sort((a, b)=> {
       return b.timeStamp - a.timeStamp
     })
-    console.log(scrapes)
     state.scrapes = scrapes
+  },
+  sortScrapes(state, dir) {
+    if (dir == 'asc') {
+      console.log(state.scrapes.sort((a, b) => a.timeStamp - b.timeStamp ))
+    } else if (dir == 'desc') {
+      console.log(state.scrapes.sort((a, b) => b.timeStamp - a.timeStamp ))
+    }
   },
   toggleScrapeFav(state, i) {
     let options = {

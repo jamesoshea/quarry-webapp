@@ -28,8 +28,12 @@ export default {
   data() {
     return {
       userIdInput: '',
-      question: 'What is your user id? (You can find it at the top of the extension popup)',
-      scrapes: []
+      question: 'What is your user id? (You can find it at the top of the extension popup)'
+    }
+  },
+  computed: {
+    scrapes() {
+      return this.$store.getters.scrapes
     }
   },
   methods: {
@@ -51,18 +55,7 @@ export default {
       }
     },
     sortScrapes(dir) {
-      let scrapes = this.$store.getters.scrapes
-      if (dir == 'asc') {
-        console.log('up')
-        scrapes.sort((a, b) => {
-          return a.timeStamp - b.timeStamp
-        })
-      } else if (dir == 'desc') {
-        scrapes.sort((a, b) => {
-          return b.timeStamp - a.timeStamp
-        })
-      }
-      this.$store.commit('setScrapes', scrapes)
+      this.$store.commit('sortScrapes', dir)
     }
   },
   beforeMount() {

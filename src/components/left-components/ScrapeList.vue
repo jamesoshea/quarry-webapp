@@ -48,7 +48,8 @@ export default {
     },
     deleteScrape(i) {
       const self = this
-      let getString = 'http://localhost:3000/scrapes/delete/' + this.$store.getters.userId + '/' + this.scrapes[i].id
+//      let getString = 'http://localhost:3000/scrapes/delete/' + this.$store.getters.userId + '/' + this.scrapes[i].id
+      let getString = 'http://quarry-17.herokuapp.com/scrapes/delete/' + this.$store.getters.userId + '/' + this.scrapes[i].id
       axios.post(getString)
         .then((response) => {
           self.$store.commit('setScrapes', response.data)
