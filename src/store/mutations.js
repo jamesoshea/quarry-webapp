@@ -28,9 +28,9 @@ export default {
   },
   sortScrapes(state, dir) {
     if (dir == 'asc') {
-      console.log(state.scrapes.sort((a, b) => a.timeStamp - b.timeStamp ))
+      state.scrapes.sort((a, b) => a.timeStamp - b.timeStamp)
     } else if (dir == 'desc') {
-      console.log(state.scrapes.sort((a, b) => b.timeStamp - a.timeStamp ))
+      state.scrapes.sort((a, b) => b.timeStamp - a.timeStamp)
     }
   },
   toggleScrapeFav(state, i) {

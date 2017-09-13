@@ -6,8 +6,6 @@ export default {
     return state.currentScrape
   },
   scrapes(state) {
-    return state.scrapes.sort((a, b)=> {
-      return b.timeStamp - a.timeStamp
-    })
+    return state.scrapes
   }
 }
