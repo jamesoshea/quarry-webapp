@@ -14,8 +14,12 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          loaders: {
-          }
+          loaders:
+            {
+              test: /\.s[a|c]ss$/,
+              loader: 'style!css!sass'
+            }
+          
           // other vue-loader options go here
         }
       },
@@ -42,9 +46,6 @@ module.exports = {
     historyApiFallback: true,
     noInfo: true,
     proxy: {
-      '/test': 'http://localhost:3000',
-      '/users': 'http://localhost:3000',
-      '/rerun': 'http://localhost:3000'
     }
   },
   performance: {

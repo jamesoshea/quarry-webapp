@@ -41,14 +41,16 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="scss">
+
+@import '../css/variables';
 
 .q-fake-link {
   cursor: pointer;
 }
 
-.q-hover-active:hover {
-
+.q-fake-link:hover {
+  color: $primary-color;
 }
 
 </style>
