@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default {
   deleteScrape(state, id) {
-//      let getString = 'http://localhost:3000/scrapes/delete/' + state.userId + '/' + id
+//    let getString = 'http://localhost:3000/scrapes/delete/' + state.userId + '/' + id
     let getString = 'http://quarry-17.herokuapp.com/scrapes/delete/' + state.userId + '/' + id
     axios.post(getString)
       .then((response) => {

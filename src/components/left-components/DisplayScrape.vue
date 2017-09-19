@@ -115,8 +115,8 @@ export default {
       let cronString = prompt('enter cron string')
       this.cronString = cronString
       const self = this
-//      axios.get('http://quarry-17.herokuapp.com/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id)
-      axios.post('http://localhost:3000/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
+      axios.post('http://quarry-17.herokuapp.com/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
+//      axios.post('http://localhost:3000/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
         cronString: cronString
       })
       .then(function (response) {
