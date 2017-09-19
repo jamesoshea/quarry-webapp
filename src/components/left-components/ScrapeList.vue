@@ -16,7 +16,11 @@
           <i v-else class="icon icon-bookmark q-list-icon" @click="toggleFavourite(index)">hello</i>
         </div>
       </div>
-      <dd class="q-fake-link text-ellipsis" @click="expandScrape(index)">{{ scrape.url }}</dd>
+      <dd class="q-fake-link text-ellipsis"
+          @click="expandScrape(index)"
+          >
+          {{ scrape.url }}
+      </dd>
     </dl>
   </div>
 </template>

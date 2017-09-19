@@ -12,7 +12,7 @@
           <button class="btn centre q-action-button"  @click="rerun(currentScrape.id)" name="button">Run Again</button>
         </div>
       </div>
-      <p class="text-ellipsis">{{currentScrape.url}}</p>
+      <p class="text-ellipsis q-url">{{currentScrape.url}}</p>
       <export-file></export-file>
       <table class="table table-striped table-hover q-table">
         <thead>
@@ -130,6 +130,11 @@ export default {
 
 .q-hover-active:hover {
   color: gold;
+}
+
+.q-url {
+  margin-top: 1em;
+  text-align: center;
 }
 
 </style>
