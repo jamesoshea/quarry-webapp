@@ -94,7 +94,7 @@ export default {
 }
 
 .q-list-icon {
-  margin-left: 0.5rem;
+
 }
 
 .q-fake-link {
@@ -102,7 +102,7 @@ export default {
 }
 
 .q-fake-link:hover {
-  color: gold;
+
 }
 
 </style>

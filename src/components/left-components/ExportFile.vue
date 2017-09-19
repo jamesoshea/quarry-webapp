@@ -125,10 +125,6 @@ export default {
 </script>
 
 <style>
-.q-filename-form {
-  /*width: 40%;
-  margin: auto;*/
-}
 
 .q-text-right {
   text-align: right;

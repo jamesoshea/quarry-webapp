@@ -116,15 +116,11 @@ export default {
 }
 
 .q-action-button {
-  border-color: #454d5d;
-  color: #454d5d;
+
 }
 
 .q-action-button:hover {
-  transform: scale(1.1);
-  border-color: gold;
-  background-color: #FFF;
-  color: #454d5d;
+
 }
 
 .q-fake-link {

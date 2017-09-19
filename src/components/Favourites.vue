@@ -48,7 +48,7 @@ export default {
 }
 
 .q-hover-active:hover {
-  color: gold;
+
 }
 
 </style>
