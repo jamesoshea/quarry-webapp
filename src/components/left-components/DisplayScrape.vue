@@ -2,14 +2,24 @@
   <div class="q-scrape-main">
     <div v-if="currentScrape">
       <div v-if="!currentScrape.rows">
-        <p class="q-centre">This scrape is empty</p>
+        <div class="empty">
+          <div class="empty-icon">
+            <i class="icon icon-search"></i>
+          </div>
+          <p class="empty-title h5">This scrape is empty.</p>
+          <p class="empty-subtitle">Click here to delete this scrape.</p>
+          <div class="empty-action">
+            <button class="btn btn-primary"
+                    @click="deleteEmptyScrape">Delete</button>
+          </div>
+        </div>
       </div>
-      <div v-else>
+      <div v-else class="q-scrape">
         <h5 class="q-centre">{{new Date(currentScrape.timeStamp).toLocaleString()}}</h5>
         <p class="text-ellipsis q-url">{{currentScrape.url}}</p>
         <export-file></export-file>
         <div class="q-centre">
-          <button class="btn q-centre q-action-button q-rerun-button"  @click="rerun(currentScrape.id)" name="button">Run Again</button>
+          <button class="btn btn-primary q-rerun-button"  @click="rerun(currentScrape.id)" name="button">Run Again</button>
         </div>
         <table class="table table-striped table-hover q-table">
           <thead>
@@ -63,6 +73,9 @@ export default {
     }
   },
   methods: {
+    deleteEmptyScrape() {
+      this.$store.commit('deleteScrape', this.currentScrape.id)
+    },
     sortRows(dir, i) {
       let result = []
       result[0] = this.currentScrape.rows[0]
@@ -100,6 +113,12 @@ export default {
 
 .q-scrape-main {
   margin-top: 1.5rem;
+}
+
+.q-scrape {
+  padding-top: 2em;
+  background-color: #f8f9fa;
+  color: #727e96;
 }
 
 .q-time-bar {

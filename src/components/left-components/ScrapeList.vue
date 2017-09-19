@@ -52,16 +52,7 @@ export default {
   },
   methods: {
     deleteScrape(i) {
-      const self = this
-//      let getString = 'http://localhost:3000/scrapes/delete/' + this.$store.getters.userId + '/' + this.scrapes[i].id
-      let getString = 'http://quarry-17.herokuapp.com/scrapes/delete/' + this.$store.getters.userId + '/' + this.scrapes[i].id
-      axios.post(getString)
-        .then((response) => {
-          self.$store.commit('setScrapes', response.data)
-        })
-        .catch((error) => {
-          console.log(error.message)
-        })
+      this.$store.commit('deleteScrape', this.scrapes[i].id)
     },
     expandScrape(i) {
       if (!this.$store.getters.currentScrape || this.$store.getters.currentScrape.id !== this.scrapes[i].id) {
