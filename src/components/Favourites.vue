@@ -7,7 +7,7 @@
           <dt>{{ new Date(scrape.timeStamp).toLocaleString() }}</dt>
         </div>
         <div class="column col-2 tooltip tooltip-left" data-tooltip="Unfavourite" @click="unFavourite(index)">
-          <i v-if="scrape.fav" class="icon icon-cross"></i>
+          <i v-if="scrape.fav" class="icon icon-cross q-fake-link"></i>
         </div>
       </div>
       <dd class="q-fake-link text-ellipsis" @click="findFav(scrape.id)">{{ scrape.url }}</dd>

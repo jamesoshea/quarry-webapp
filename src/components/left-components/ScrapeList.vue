@@ -1,7 +1,7 @@
 <template lang="html">
-  <div class="q-scrape-list">
+  <div class="q-scrape-list"v-if="scrapes.length">
     <div>
-      <div class="columns" v-if="scrapes.length">
+      <div class="columns">
         <div class="column col-2">
           <h4>Scrapes</h4>
         </div>
