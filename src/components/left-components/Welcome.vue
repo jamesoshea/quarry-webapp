@@ -15,13 +15,9 @@
               v-if="question"
               v-model="userIdInput"
               type="text"
-              placeholder="User ID" autofocus>
-      <input  class="form-input q-input-id"
-              v-if="question"
-              v-model="userPasswordInput"
-              type="text"
-              @keydown="getUser"
-              placeholder="User Password" autofocus>
+              placeholder="User ID"
+              v-on:keyup.enter="getUser"
+              autofocus>
     </div>
   </div>
 </template>
@@ -44,23 +40,21 @@ export default {
   },
   methods: {
     getUser(event) {
-      if (event.key == "Enter") {
-        const self = this
-        let getString = 'http://quarry-17.herokuapp.com/users/' + self.userIdInput
+      const self = this
+      let getString = 'http://quarry-17.herokuapp.com/users/' + self.userIdInput
 //        let getString = 'http://localhost:3000/users/' + self.userIdInput
-        axios.get(getString)
-        .then((response)=> {
-          self.question = null
-          this.$store.commit('setScrapes', response.data.snapshot)
-          localStorage.setItem('token', response.data.token)
-          this.$store.commit('setUser', this.userIdInput)
-          localStorage.setItem('userId', this.userIdInput)
-        })
-        .catch((error)=> {
-          console.log(error)
-          self.question = 'User not found'
-        })
-      }
+      axios.get(getString)
+      .then((response)=> {
+        self.question = null
+        this.$store.commit('setScrapes', response.data.snapshot)
+        localStorage.setItem('token', response.data.token)
+        this.$store.commit('setUser', this.userIdInput)
+        localStorage.setItem('userId', this.userIdInput)
+      })
+      .catch((error)=> {
+        console.log(error)
+        self.question = 'User not found'
+      })
     },
     sortScrapes(dir) {
       this.$store.commit('sortScrapes', dir)
