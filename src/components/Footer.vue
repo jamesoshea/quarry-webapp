@@ -11,6 +11,6 @@ export default {
 
 <style lang="css">
 .footer {
-  min-height: 5em;
+  min-height: 3em;
 }
 </style>
