@@ -1,13 +1,17 @@
 <template lang="html">
   <div class="q-scrape-list"v-if="scrapes.length">
-    <div>
-      <div class="columns">
-        <div class="column col-2">
-          <h4>Scrapes</h4>
-        </div>
-        <div class="column col-2">
-          <i class="icon icon-arrow-up q-fake-link" @click="sortScrapes('asc')"></i>
-          <i class="icon icon-arrow-down q-fake-link" @click="sortScrapes('desc')"></i>
+    <div class="columns">
+      <div class="column col-2">
+        <h4>Scrapes</h4>
+      </div>
+      <div class="column col-2 q-arrows">
+        <div class="columns">
+          <div class="column col-1 tooltip tooltip-left" data-tooltip="Sort Ascending">
+            <i class="icon icon-arrow-up q-fake-link" @click="sortScrapes('asc')"></i>
+          </div>
+          <div class="column col-1 tooltip tooltip-left" data-tooltip="Sort Descending">
+            <i class="icon icon-arrow-down q-fake-link" @click="sortScrapes('desc')"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -24,7 +28,9 @@
           <i  v-if="scrape.fav"
               class="icon icon-bookmark q-bookmark-active"
               @click="toggleFavourite(index)"></i>
-          <i v-else class="icon icon-bookmark q-fake-link" @click="toggleFavourite(index)">hello</i>
+          <i  v-else
+              class="icon icon-bookmark q-fake-link"
+              @click="toggleFavourite(index)">hello</i>
         </div>
       </div>
       <dd class="q-fake-link text-ellipsis"
@@ -76,6 +82,10 @@ export default {
 
 @import '../../css/variables';
 
+.q-arrows {
+  padding-top: 0.25em;
+}
+
 .q-scrape-list {
   max-height: 200px;
   overflow-y: scroll;
@@ -85,6 +95,9 @@ export default {
 .q-bookmark-active {
   cursor: pointer;
   color: $primary-color;
+  &:hover {
+    color: lighten($dark-color, 5%);
+  }
 }
 
 </style>
