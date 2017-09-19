@@ -6,8 +6,8 @@
           <h4>Scrapes</h4>
         </div>
         <div class="column col-2">
-          <i class="icon icon-arrow-up q-hover-active" @click="sortScrapes('asc')"></i>
-          <i class="icon icon-arrow-down q-hover-active" @click="sortScrapes('desc')"></i>
+          <i class="icon icon-arrow-up q-fake-link" @click="sortScrapes('asc')"></i>
+          <i class="icon icon-arrow-down q-fake-link" @click="sortScrapes('desc')"></i>
         </div>
       </div>
     </div>
@@ -17,14 +17,14 @@
           <dt>{{ new Date(scrape.timeStamp).toLocaleString() }}</dt>
         </div>
         <div class="column col-1 tooltip tooltip-left" data-tooltip="Delete">
-          <i  class="icon icon-delete q-list-icon"
+          <i  class="icon icon-delete q-fake-link"
               @click="deleteScrape(index)"></i>
         </div>
         <div class="column col-1 tooltip tooltip-left" data-tooltip="Un/favourite">
           <i  v-if="scrape.fav"
-              class="icon icon-bookmark q-bookmark-active q-list-icon"
+              class="icon icon-bookmark q-bookmark-active"
               @click="toggleFavourite(index)"></i>
-          <i v-else class="icon icon-bookmark q-list-icon" @click="toggleFavourite(index)">hello</i>
+          <i v-else class="icon icon-bookmark q-fake-link" @click="toggleFavourite(index)">hello</i>
         </div>
       </div>
       <dd class="q-fake-link text-ellipsis"
@@ -81,7 +81,9 @@ export default {
 
 </script>
 
-<style lang="css">
+<style lang="scss" scoped>
+
+@import '../../css/variables';
 
 .q-scrape-list {
   max-height: 200px;
@@ -90,19 +92,8 @@ export default {
 }
 
 .q-bookmark-active {
-  color: gold;
-}
-
-.q-list-icon {
-
-}
-
-.q-fake-link {
   cursor: pointer;
-}
-
-.q-fake-link:hover {
-
+  color: $primary-color;
 }
 
 </style>

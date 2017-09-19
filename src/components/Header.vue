@@ -28,17 +28,15 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="scss" scoped>
 
 .q-header {
   padding-top: 1em;
+  margin-bottom: 0.5em;
 }
 
 .q-logout {
-  padding-top: 1em;
+  padding-top: 0.5em;
 }
 
-.q-fake-link {
-  cursor: pointer;
-}
 </style>

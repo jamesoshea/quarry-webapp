@@ -18,10 +18,10 @@
                 <div class="text-break">{{ column }} ({{ currentScrape.rows[1][index] }})</div>
                 <div class="columns">
                   <div class="column col-1 tooltip tooltip-left" data-tooltip="Sort Ascending">
-                    <i class="icon icon-arrow-up q-hover-active" @click="sortRows('asc', index)"></i>
+                    <i class="icon icon-arrow-up q-fake-link" @click="sortRows('asc', index)"></i>
                   </div>
                   <div class="column col-1 tooltip tooltip-left" data-tooltip="Sort Descending">
-                    <i class="icon icon-arrow-down q-hover-active" @click="sortRows('desc', index)"></i>
+                    <i class="icon icon-arrow-down q-fake-link" @click="sortRows('desc', index)"></i>
                   </div>
                 </div>
               </th>
@@ -96,14 +96,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
 .q-scrape-main {
   margin-top: 1.5rem;
-}
-
-.q-centre {
-  text-align: center;
 }
 
 .q-time-bar {
@@ -112,23 +108,6 @@ export default {
 
 .q-rerun-button {
   margin-top: 0.5em;
-  width: auto;
-}
-
-.q-action-button {
-
-}
-
-.q-action-button:hover {
-
-}
-
-.q-fake-link {
-  cursor: pointer;
-}
-
-.q-hover-active:hover {
-  color: gold;
 }
 
 .q-url {

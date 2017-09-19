@@ -1,5 +1,5 @@
 <template lang="html">
-  <form class="form-horizontal q-rerun-form">
+  <form class="form-horizontal">
     <div class="form-group">
       <div class="col-3 q-text-right">
         <label class="form-label" for="input-example-1">Save as:</label>
@@ -124,7 +124,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
 .q-text-right {
   text-align: right;
@@ -135,7 +135,4 @@ export default {
   margin-left: 1.5rem;
 }
 
-.q-rerun-form {
-  width: 100%
-}
 </style>

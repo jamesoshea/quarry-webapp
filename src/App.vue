@@ -13,8 +13,7 @@
     </div>
     <div class="columns">
       <div class="column col-9">
-        <router-view>
-        </router-view>
+        <left></left>
       </div>
       <div class="column col-3">
         <favourites></favourites>
@@ -27,6 +26,7 @@
 <script>
 import axios from 'axios'
 import Header from './components/Header.vue'
+import Left from './components/Left.vue'
 import Favourites from './components/Favourites.vue'
 import Footer from './components/Footer.vue'
 
@@ -34,6 +34,7 @@ export default {
   name: 'app',
   components: {
     'app-header': Header,
+    'left': Left,
     'favourites': Favourites,
     'app-footer': Footer
   },
@@ -79,27 +80,28 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 
-body {
-  background-color: #eee;
-}
+@import './css/variables';
 
 #app {
   width: 80%;
   margin: auto;
 }
 
-#q-main-msg {
-  text-align: center;
-}
-
 .q-main-divider {
-  margin-bottom: 2em;
+  margin-bottom: 1.5em;
 }
 
 .q-centre {
   text-align: center;
+}
+
+.q-fake-link {
+  cursor: pointer;
+  &:hover {
+    color: $primary-color;
+  }
 }
 
 .q-input-id {
