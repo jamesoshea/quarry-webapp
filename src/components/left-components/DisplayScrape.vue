@@ -19,7 +19,12 @@
         <p class="text-ellipsis q-url">{{currentScrape.url}}</p>
         <export-file></export-file>
         <div class="q-centre">
-          <button class="btn btn-primary q-rerun-button"  @click="rerun(currentScrape.id)" name="button">Run Again</button>
+          <button class="btn btn-primary q-rerun-button"
+                  @click="rerun(currentScrape.id)"
+                  name="button">Run Again</button>
+          <button class="btn btn-primary q-rerun-button"
+                  @click="scheduleRerun(currentScrape.id)"
+                  name="button">Schedule a Run</button>
         </div>
         <table class="table table-striped table-hover q-table">
           <thead>
@@ -58,7 +63,8 @@ import ExportFile from './ExportFile.vue'
 export default {
   data() {
     return {
-
+      showScheduler: false,
+      cronString: ''
     }
   },
   components: {
@@ -102,8 +108,23 @@ export default {
         self.$store.commit('setScrapes', response.data)
       })
       .catch(function (error) {
-        console.log(error);
-      });
+        console.log(error)
+      })
+    },
+    scheduleRerun(id) {
+      let cronString = prompt('enter cron string')
+      this.cronString = cronString
+      const self = this
+//      axios.get('http://quarry-17.herokuapp.com/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id)
+      axios.post('http://localhost:3000/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
+        cronString: cronString
+      })
+      .then(function (response) {
+        console.log(response.data)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
     }
   }
 }
