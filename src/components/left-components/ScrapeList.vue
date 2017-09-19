@@ -1,5 +1,16 @@
 <template lang="html">
   <div class="q-scrape-list">
+    <div>
+      <div class="columns" v-if="scrapes.length">
+        <div class="column col-2">
+          <h4>Scrapes</h4>
+        </div>
+        <div class="column col-2">
+          <i class="icon icon-arrow-up q-hover-active" @click="sortScrapes('asc')"></i>
+          <i class="icon icon-arrow-down q-hover-active" @click="sortScrapes('desc')"></i>
+        </div>
+      </div>
+    </div>
     <dl v-for="(scrape, index) in scrapes">
       <div class="columns">
         <div class="column col-10">
@@ -40,16 +51,6 @@ export default {
     }
   },
   methods: {
-    expandScrape(i) {
-      if (!this.$store.getters.currentScrape || this.$store.getters.currentScrape.id !== this.scrapes[i].id) {
-        this.$store.commit('setCurrentScrape', this.scrapes[i])
-      } else {
-        this.$store.commit('setCurrentScrape', null)
-      }
-    },
-    toggleFavourite(i) {
-      this.$store.commit('toggleScrapeFav', i)
-    },
     deleteScrape(i) {
       const self = this
 //      let getString = 'http://localhost:3000/scrapes/delete/' + this.$store.getters.userId + '/' + this.scrapes[i].id
@@ -61,6 +62,19 @@ export default {
         .catch((error) => {
           console.log(error.message)
         })
+    },
+    expandScrape(i) {
+      if (!this.$store.getters.currentScrape || this.$store.getters.currentScrape.id !== this.scrapes[i].id) {
+        this.$store.commit('setCurrentScrape', this.scrapes[i])
+      } else {
+        this.$store.commit('setCurrentScrape', null)
+      }
+    },
+    sortScrapes(dir) {
+      this.$store.commit('sortScrapes', dir)
+    },
+    toggleFavourite(i) {
+      this.$store.commit('toggleScrapeFav', i)
     }
   }
 }

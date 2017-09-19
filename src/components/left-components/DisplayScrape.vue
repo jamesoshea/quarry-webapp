@@ -1,41 +1,39 @@
 <template lang="html">
   <div class="q-scrape-main">
     <div v-if="currentScrape">
-      <div class="columns">
-        <div class="column col-4">
-
-        </div>
-        <div class="column col-4 q-time-bar">
-          <h5 class="centre">{{new Date(currentScrape.timeStamp).toLocaleString()}}</h5>
-        </div>
-        <div class="column col-4">
-          <button class="btn centre q-action-button"  @click="rerun(currentScrape.id)" name="button">Run Again</button>
-        </div>
+      <div v-if="!currentScrape.rows">
+        <p class="q-centre">This scrape is empty</p>
       </div>
-      <p class="text-ellipsis q-url">{{currentScrape.url}}</p>
-      <export-file></export-file>
-      <table class="table table-striped table-hover q-table">
-        <thead>
-          <tr>
-            <th v-for="(column, index) in currentScrape.rows[0]">
-              <div class="text-break">{{ column }} ({{ currentScrape.rows[1][index] }})</div>
-              <div class="columns">
-                <div class="column col-1 tooltip tooltip-left" data-tooltip="Sort Ascending">
-                  <i class="icon icon-arrow-up q-hover-active" @click="sortRows('asc', index)"></i>
+      <div v-else>
+        <h5 class="q-centre">{{new Date(currentScrape.timeStamp).toLocaleString()}}</h5>
+        <p class="text-ellipsis q-url">{{currentScrape.url}}</p>
+        <export-file></export-file>
+        <div class="q-centre">
+          <button class="btn q-centre q-action-button q-rerun-button"  @click="rerun(currentScrape.id)" name="button">Run Again</button>
+        </div>
+        <table class="table table-striped table-hover q-table">
+          <thead>
+            <tr>
+              <th v-for="(column, index) in currentScrape.rows[0]">
+                <div class="text-break">{{ column }} ({{ currentScrape.rows[1][index] }})</div>
+                <div class="columns">
+                  <div class="column col-1 tooltip tooltip-left" data-tooltip="Sort Ascending">
+                    <i class="icon icon-arrow-up q-hover-active" @click="sortRows('asc', index)"></i>
+                  </div>
+                  <div class="column col-1 tooltip tooltip-left" data-tooltip="Sort Descending">
+                    <i class="icon icon-arrow-down q-hover-active" @click="sortRows('desc', index)"></i>
+                  </div>
                 </div>
-                <div class="column col-1 tooltip tooltip-left" data-tooltip="Sort Descending">
-                  <i class="icon icon-arrow-down q-hover-active" @click="sortRows('desc', index)"></i>
-                </div>
-              </div>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="row in currentScrape.rows.slice(2, currentScrape.rows.length).reverse()">
-            <td class="text-break" v-for="item in row">{{ item }}</td>
-          </tr>
-        </tbody>
-      </table>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="row in currentScrape.rows.slice(2, currentScrape.rows.length).reverse()">
+              <td class="text-break" v-for="item in row">{{ item }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div v-else>
       <h5 v-if="scrapes.length">Select a scrape by clicking its URL above</h5>
@@ -104,7 +102,7 @@ export default {
   margin-top: 1.5rem;
 }
 
-.centre {
+.q-centre {
   text-align: center;
 }
 
@@ -112,16 +110,21 @@ export default {
   padding-top: 0.25rem;
 }
 
+.q-rerun-button {
+  margin-top: 0.5em;
+  width: auto;
+}
+
 .q-action-button {
-  border-color: #000;
-  color: #000;
+  border-color: #454d5d;
+  color: #454d5d;
 }
 
 .q-action-button:hover {
   transform: scale(1.1);
   border-color: gold;
   background-color: #FFF;
-  color: #000;
+  color: #454d5d;
 }
 
 .q-fake-link {

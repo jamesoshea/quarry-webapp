@@ -1,5 +1,5 @@
 <template>
-  <div class="column col-2">
+  <div v-if="loggedIn">
     <h4>Favourites</h4>
     <dl v-for="(scrape, index) in favourites">
       <div class="columns">
@@ -25,6 +25,9 @@ export default {
     },
     scrapes() {
       return this.$store.getters.scrapes
+    },
+    loggedIn() {
+      return this.$store.getters.loggedIn
     }
   },
   methods: {

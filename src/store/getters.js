@@ -1,11 +1,14 @@
 export default {
-  userId(state) {
-    return state.userId
-  },
   currentScrape(state) {
     return state.currentScrape
   },
+  loggedIn(state) {
+    return state.loggedIn
+  },
   scrapes(state) {
     return state.scrapes
+  },
+  userId(state) {
+    return state.userId
   }
 }

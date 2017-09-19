@@ -1,6 +1,9 @@
 import axios from 'axios'
 
 export default {
+  login(state) {
+    state.loggedIn = true
+  },
   setUser(state, userId) {
     state.userId = userId
   },

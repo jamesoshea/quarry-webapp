@@ -1,17 +1,17 @@
 <template lang="html">
-  <form class="form-horizontal">
+  <form class="form-horizontal q-rerun-form">
     <div class="form-group">
       <div class="col-3 q-text-right">
         <label class="form-label" for="input-example-1">Save as:</label>
       </div>
-      <div class="col-6">
+      <div class="col-5">
         <input ref="filename"
           class="form-input centre q-filename-form"
           v-model="filename"
           placeholder="Filename"
           v-focus>
       </div>
-      <div class="col-3 q-output-format">
+      <div class="col-4 q-output-format">
         <label class="form-label" for="input-example-1">
           <span class="q-fake-link" @click="exportFile(currentScrape.rows, 'csv')">.CSV</span> |
           <span class="q-fake-link" @click="exportFile(currentScrape.rows, 'tsv')">TSV</span> |
@@ -43,7 +43,6 @@ export default {
   methods: {
     exportFile(rows, format) {
       if (!this.filename) {
-        alert('Please enter a filename.')
         return
       }
       let processRow = function (row) {
@@ -138,5 +137,9 @@ export default {
 
 .q-output-format {
   margin-left: 1.5rem;
+}
+
+.q-rerun-form {
+  width: 100%
 }
 </style>
