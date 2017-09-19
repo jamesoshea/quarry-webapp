@@ -4,14 +4,14 @@
       <div class="col-3 q-text-right">
         <label class="form-label" for="input-example-1">Save as:</label>
       </div>
-      <div class="col-5">
+      <div class="col-6">
         <input ref="filename"
           class="form-input centre q-filename-form"
           v-model="filename"
           placeholder="Filename"
           v-focus>
       </div>
-      <div class="col-4 q-output-format">
+      <div class="col-3 q-output-format">
         <label class="form-label" for="input-example-1">
           <span class="q-fake-link" @click="exportFile(currentScrape.rows, 'csv')">.CSV</span> |
           <span class="q-fake-link" @click="exportFile(currentScrape.rows, 'tsv')">TSV</span> |
