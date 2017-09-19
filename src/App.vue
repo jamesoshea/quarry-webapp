@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <h1 id="q-main-msg">Quarry</h1>
-    <div v-if="scrapes.length == 0">
-      <p class="q-centre">{{ question }}</p>
+    <app-header></app-header>
+    <div class="divider q-main-divider"></div>
+    <div v-if="!loggedIn">
+      <p class="q-centre">What is your user id? (You can find it at the top of the extension)</p>
       <input  class="form-input q-input-id"
-              v-if="question"
               v-model="userIdInput"
               type="text"
               placeholder="User ID"
@@ -26,25 +26,29 @@
 
 <script>
 import axios from 'axios'
+import Header from './components/Header.vue'
 import Favourites from './components/Favourites.vue'
 import Footer from './components/Footer.vue'
 
 export default {
   name: 'app',
   components: {
+    'app-header': Header,
     'favourites': Favourites,
     'app-footer': Footer
   },
   data() {
     return {
       userIdInput: '',
-      userPasswordInput: '',
-      question: 'What is your user id? (You can find it at the top of the extension)'
+      userPasswordInput: ''
     }
   },
   computed: {
     scrapes() {
       return this.$store.getters.scrapes
+    },
+    loggedIn() {
+      return this.$store.getters.loggedIn
     }
   },
   methods: {
@@ -90,12 +94,20 @@ body {
   text-align: center;
 }
 
+.q-main-divider {
+  margin-bottom: 2em;
+}
+
 .q-centre {
   text-align: center;
 }
 
 .q-input-id {
   margin-bottom: 1em;
+}
+
+.q-logout {
+  margin-top: 0.75em;
 }
 
 </style>

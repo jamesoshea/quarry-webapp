@@ -4,6 +4,12 @@ export default {
   login(state) {
     state.loggedIn = true
   },
+  logout(state) {
+    state.loggedIn = false
+    state.userId = ''
+    state.scrapes = []
+    state.currentScrape = null
+  },
   setUser(state, userId) {
     state.userId = userId
   },
