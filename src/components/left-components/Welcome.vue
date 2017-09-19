@@ -15,8 +15,13 @@
               v-if="question"
               v-model="userIdInput"
               type="text"
-              @keydown="getUser"
               placeholder="User ID" autofocus>
+      <input  class="form-input q-input-id"
+              v-if="question"
+              v-model="userPasswordInput"
+              type="text"
+              @keydown="getUser"
+              placeholder="User Password" autofocus>
     </div>
   </div>
 </template>
@@ -28,7 +33,8 @@ export default {
   data() {
     return {
       userIdInput: '',
-      question: 'What is your user id? (You can find it at the top of the extension popup)'
+      userPasswordInput: '',
+      question: 'What is your user id and password? (You can find it at the top of the extension popup)'
     }
   },
   computed: {
@@ -40,11 +46,13 @@ export default {
     getUser(event) {
       if (event.key == "Enter") {
         const self = this
-        let getString = 'https://quarry-17.herokuapp.com/users/' + self.userIdInput
+        let getString = 'http://quarry-17.herokuapp.com/users/' + self.userIdInput
+//        let getString = 'http://localhost:3000/users/' + self.userIdInput
         axios.get(getString)
         .then((response)=> {
           self.question = null
-          this.$store.commit('setScrapes', response.data)
+          this.$store.commit('setScrapes', response.data.snapshot)
+          localStorage.setItem('token', response.data.token)
           this.$store.commit('setUser', this.userIdInput)
           localStorage.setItem('userId', this.userIdInput)
         })
@@ -67,4 +75,7 @@ export default {
 </script>
 
 <style lang="css">
+  .q-input-id {
+    margin-bottom: 1em;
+  }
 </style>
