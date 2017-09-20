@@ -56,11 +56,11 @@ export default {
     getUser(event) {
       const self = this
       let getString = 'http://quarry-17.herokuapp.com/users/' + self.userIdInput
-//        let getString = 'http://localhost:3000/users/' + self.userIdInput
+//      let getString = 'http://localhost:3000/users/' + self.userIdInput
       axios.get(getString)
       .then((response)=> {
         self.question = null
-        this.$store.commit('setScrapes', response.data.snapshot)
+        this.$store.commit('setScrapes', response.data.snapshot.scrapes)
         localStorage.setItem('token', response.data.token)
         this.$store.commit('setUser', this.userIdInput)
         localStorage.setItem('userId', this.userIdInput)
