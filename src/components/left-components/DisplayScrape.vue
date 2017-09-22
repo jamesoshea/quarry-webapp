@@ -64,21 +64,20 @@
           <div class="modal-title h5">Schedule Reruns</div>
         </div>
         <div class="modal-body">
-          <div class="content">
+          <div class="content q-centre">
             <h2>Have this scraped:</h2>
             <div class="form-group">
-              <form>
-                <label class="form-label q-centre">Frequency</label>
+              <form class="q-centre">
                 <label class="form-radio q-centre">
                   <input type="radio" v-model="frequency" value="daily" checked>
                   <i class="form-icon"></i> Daily
-                </label>
+                </label><br />
                 <label class="form-radio q-centre">
                   <input type="radio" v-model="frequency" value="weekly">
                   <i class="form-icon"></i> Weekly
                 </label>
               </form>
-              <button class="btn btn-primary" @click="scheduleRerun">Noice</button>
+              <button id="rerun-submit" class="btn btn-primary" @click="scheduleRerun">Noice</button>
             </div>
           </div>
         </div>
@@ -144,8 +143,8 @@ export default {
       })
     },
     scheduleRerun(id) {
-//      axios.post('http://quarry-17.herokuapp.com/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
-      axios.post('http://localhost:3000/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
+      axios.post('http://quarry-17.herokuapp.com/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
+//      axios.post('http://localhost:3000/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
         freq: this.frequency
       })
       .then(function (response) {
@@ -183,6 +182,10 @@ export default {
 
 #q-select-message {
   padding: 1.5em;
+}
+
+#rerun-submit {
+  margin-top: 1em;
 }
 
 </style>
