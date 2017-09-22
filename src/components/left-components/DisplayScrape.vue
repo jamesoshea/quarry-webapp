@@ -4,7 +4,7 @@
       <div v-if="!currentScrape.rows">
         <div class="empty">
           <div class="empty-icon">
-            <i class="icon icon-search"></i>
+            <i class="icon icon-search"></i>!?
           </div>
           <p class="empty-title h5">This scrape is empty.</p>
           <p class="empty-subtitle">Click here to delete this scrape.</p>
@@ -50,8 +50,11 @@
         </table>
       </div>
     </div>
-    <div v-else id="q-select-message">
-      <h5 v-if="scrapes.length" class="q-centre">Select a scrape by clicking its URL above</h5>
+    <div v-if="scrapes.length && !currentScrape" class="empty">
+      <div class="empty-icon">
+        <i class="icon icon-search"></i>
+      </div>
+      <p class="empty-title h5">Select a scrape by clicking above.</p>
     </div>
   </div>
 </template>

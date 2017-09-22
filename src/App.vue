@@ -14,12 +14,12 @@
     <div v-if="emptyUser">
       <div class="empty">
         <div class="empty-icon">
-          <i class="icon icon-search"></i>?
+          <i class="icon icon-search"></i>!?
         </div>
         <p class="empty-title h5">You haven't scraped anything yet!</p>
         <p class="empty-subtitle q-fake-link">
           <a href="https://chrome.google.com/webstore/detail/quarry/jkgbmaenkkenaipebbdnlhkijkiaonel" target="blank">
-            Get the Chrome extension here to get started.
+            Grab the Chrome extension here to get started.
           </a>
         </p>
       </div>
@@ -81,7 +81,7 @@ export default {
           localStorage.setItem('userId', this.userIdInput)
           this.$store.commit('login')
         }
-        if (!response.data.hasOwnProperty('name')) {
+        if (response.data.hasOwnProperty('name')) {
           this.$store.commit('setUsername', response.data.name)
         }
       })
@@ -125,6 +125,7 @@ export default {
 
 .q-input-id {
   margin-bottom: 1em;
+  text-align: center;
 }
 
 .q-logout {

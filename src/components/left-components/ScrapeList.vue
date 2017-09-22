@@ -57,7 +57,6 @@ export default {
       this.$store.commit('deleteScrape', this.scrapes[i].id)
     },
     expandScrape(i) {
-      console.log(event)
       if (!this.$store.getters.currentScrape || this.$store.getters.currentScrape.id !== this.scrapes[i].id) {
         this.$store.commit('setCurrentScrape', this.scrapes[i])
       } else {

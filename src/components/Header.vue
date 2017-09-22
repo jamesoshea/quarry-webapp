@@ -3,9 +3,8 @@
     <div class="column col-7">
       <h1 id="q-main-msg">Quarry</h1>
     </div>
-    <div class="column col-5 q-logout">
+    <div v-if="loggedIn" class="column col-5 q-logout">
       <button class="btn"
-            v-if="loggedIn"
             @click="logout">
             <i class="icon icon-shutdown"></i> Logout
       </button>
@@ -80,7 +79,8 @@ export default {
       this.$store.commit('logout')
     },
     sendSettings() {
-      axios.post('http://localhost:3000/users/' + this.userId + '/setName', {name: this.nameInput})
+      axios.post('http://quarry-17.herokuapp.com/users/' + this.userId + '/setName', {name: this.nameInput})
+//      axios.post('http://localhost:3000/users/' + this.userId + '/setName', {name: this.nameInput})
         .then((response) => {
           this.$store.commit('setUsername', this.nameInput)
           this.settingsActive = false

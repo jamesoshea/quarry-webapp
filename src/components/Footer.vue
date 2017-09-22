@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="footer">
     <div class="divider">
-      <p class="q-centre q-footer-content">Built by James O'Shea. Find the repos on <a href="https://github.com/jamesoshea">GitHub</a></p>
+      <p class="q-centre q-footer-content">Built by James O'Shea. Find the repos on <a href="https://github.com/jamesoshea">GitHub.</a></p>
     </div>
   </div>
 </template>
