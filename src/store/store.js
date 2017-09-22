@@ -11,7 +11,8 @@ export const store = new Vuex.Store({
       loggedIn: false,
       userId: '',
       scrapes: [],
-      currentScrape: null
+      currentScrape: null,
+      username: ''
     },
     getters,
     mutations

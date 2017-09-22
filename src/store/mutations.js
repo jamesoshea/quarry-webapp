@@ -21,6 +21,7 @@ export default {
     state.userId = ''
     state.scrapes = []
     state.currentScrape = null
+    state.username = ''
   },
   setUser(state, userId) {
     state.userId = userId
@@ -37,6 +38,9 @@ export default {
     } else if (dir == 'desc') {
       state.scrapes.sort((a, b) => b.timeStamp - a.timeStamp)
     }
+  },
+  setUsername(state, name) {
+    state.username = name
   },
   toggleScrapeFav(state, i) {
     let options = {

@@ -1,6 +1,6 @@
 <template lang="html">
-  <div class="q-scrape-main">
-    <div v-if="currentScrape">
+  <div>
+    <div v-if="currentScrape" class="q-scrape-main">
       <div v-if="!currentScrape.rows">
         <div class="empty">
           <div class="empty-icon">
@@ -50,8 +50,8 @@
         </table>
       </div>
     </div>
-    <div v-else>
-      <h5 v-if="scrapes.length">Select a scrape by clicking its URL above</h5>
+    <div v-else id="q-select-message">
+      <h5 v-if="scrapes.length" class="q-centre">Select a scrape by clicking its URL above</h5>
     </div>
   </div>
 </template>
@@ -133,17 +133,14 @@ export default {
 <style lang="scss" scoped>
 
 .q-scrape-main {
-  margin-top: 1.5rem;
+  background-color: #f8f9fa;
+  margin-top: 1.5em;
+  padding: 1.5em;
 }
 
 .q-scrape {
   padding-top: 2em;
-  background-color: #f8f9fa;
   color: #727e96;
-}
-
-.q-time-bar {
-  padding-top: 0.25rem;
 }
 
 .q-rerun-button {
@@ -153,6 +150,10 @@ export default {
 .q-url {
   margin-top: 1em;
   text-align: center;
+}
+
+#q-select-message {
+  padding: 1.5em;
 }
 
 </style>

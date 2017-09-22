@@ -1,24 +1,20 @@
 <template lang="html">
-  <div class="q-scrape-list"v-if="scrapes.length">
+  <div class="q-scrape-list" v-if="scrapes.length">
     <div class="columns">
-      <div class="column col-2">
+      <div class="column col-2" id="q-scrapes-heading">
         <h4>Scrapes</h4>
       </div>
-      <div class="column col-2 q-arrows">
-        <div class="columns">
-          <div class="column col-1 tooltip tooltip-left" data-tooltip="Sort Ascending">
-            <i class="icon icon-arrow-up q-fake-link" @click="sortScrapes('asc')"></i>
-          </div>
-          <div class="column col-1 tooltip tooltip-left" data-tooltip="Sort Descending">
-            <i class="icon icon-arrow-down q-fake-link" @click="sortScrapes('desc')"></i>
-          </div>
-        </div>
+      <div class="column col-1 tooltip tooltip-left q-scrape-list-arrows" data-tooltip="Sort Ascending">
+        <i class="icon icon-arrow-up q-fake-link" @click="sortScrapes('asc')"></i>
+      </div>
+      <div class="column col-1 tooltip tooltip-left q-scrape-list-arrows" data-tooltip="Sort Descending">
+        <i class="icon icon-arrow-down q-fake-link" @click="sortScrapes('desc')"></i>
       </div>
     </div>
     <dl v-for="(scrape, index) in scrapes">
       <div class="columns">
         <div class="column col-10">
-          <dt>{{ new Date(scrape.timeStamp).toLocaleString() }}</dt>
+          <dt class="q-scrape-dates">{{ new Date(scrape.timeStamp).toLocaleString() }}</dt>
         </div>
         <div class="column col-1 tooltip tooltip-left" data-tooltip="Delete">
           <i  class="icon icon-delete q-fake-link"
@@ -61,6 +57,7 @@ export default {
       this.$store.commit('deleteScrape', this.scrapes[i].id)
     },
     expandScrape(i) {
+      console.log(event)
       if (!this.$store.getters.currentScrape || this.$store.getters.currentScrape.id !== this.scrapes[i].id) {
         this.$store.commit('setCurrentScrape', this.scrapes[i])
       } else {
@@ -82,11 +79,13 @@ export default {
 
 @import '../../css/variables';
 
-.q-arrows {
-  padding-top: 0.25em;
+.q-scrape-list-arrows {
+  padding-top: 0.5em;
 }
 
 .q-scrape-list {
+  padding: 1.5em;
+  padding-top: 0em;
   max-height: 200px;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -98,6 +97,10 @@ export default {
   &:hover {
     color: lighten($dark-color, 5%);
   }
+}
+
+#q-scrapes-heading {
+  margin-right: 2em;
 }
 
 </style>

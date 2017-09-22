@@ -11,6 +11,19 @@
               v-on:keyup.enter="getUser"
               autofocus>
     </div>
+    <div v-if="emptyUser">
+      <div class="empty">
+        <div class="empty-icon">
+          <i class="icon icon-search"></i>?
+        </div>
+        <p class="empty-title h5">You haven't scraped anything yet!</p>
+        <p class="empty-subtitle q-fake-link">
+          <a href="https://chrome.google.com/webstore/detail/quarry/jkgbmaenkkenaipebbdnlhkijkiaonel" target="blank">
+            Get the Chrome extension here to get started.
+          </a>
+        </p>
+      </div>
+    </div>
     <div class="columns">
       <div class="column col-9">
         <left></left>
@@ -41,7 +54,7 @@ export default {
   data() {
     return {
       userIdInput: '',
-      userPasswordInput: ''
+      emptyUser: false
     }
   },
   computed: {
@@ -54,21 +67,27 @@ export default {
   },
   methods: {
     getUser(event) {
-      const self = this
-      let getString = 'http://quarry-17.herokuapp.com/users/' + self.userIdInput
-//      let getString = 'http://localhost:3000/users/' + self.userIdInput
+//      let getString = 'http://quarry-17.herokuapp.com/users/' + self.userIdInput
+     let getString = 'http://localhost:3000/users/' + this.userIdInput
       axios.get(getString)
       .then((response)=> {
-        self.question = null
-        this.$store.commit('setScrapes', response.data.snapshot.scrapes)
-        localStorage.setItem('token', response.data.token)
-        this.$store.commit('setUser', this.userIdInput)
-        localStorage.setItem('userId', this.userIdInput)
-        this.$store.commit('login')
+        if (!response.data.hasOwnProperty('scrapes')) {
+          this.emptyUser = true
+        } else {
+          this.emptyUser = false
+          this.question = null
+          this.$store.commit('setScrapes', response.data.scrapes)
+          this.$store.commit('setUser', this.userIdInput)
+          localStorage.setItem('userId', this.userIdInput)
+          this.$store.commit('login')
+        }
+        if (!response.data.hasOwnProperty('name')) {
+          this.$store.commit('setUsername', response.data.name)
+        }
       })
       .catch((error)=> {
         console.log(error)
-        self.question = 'User not found'
+        this.question = 'User not found'
       })
     }
   },
