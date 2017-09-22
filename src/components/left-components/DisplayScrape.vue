@@ -23,7 +23,7 @@
                   @click="rerun(currentScrape.id)"
                   name="button">Run Again</button>
           <button class="btn btn-primary q-rerun-button"
-                  @click="scheduleRerun(currentScrape.id)"
+                  @click="rerunModalActive = true"
                   name="button">Schedule a Run</button>
         </div>
         <table class="table table-striped table-hover q-table">
@@ -56,6 +56,34 @@
       </div>
       <p class="empty-title h5">Select a scrape by clicking above.</p>
     </div>
+    <div :class="{active: rerunModalActive}" class="modal">
+      <div class="modal-overlay"></div>
+      <div class="modal-container">
+        <div class="modal-header">
+          <button class="btn btn-clear float-right q-fake-link" @click="rerunModalActive = false"></button>
+          <div class="modal-title h5">Schedule Reruns</div>
+        </div>
+        <div class="modal-body">
+          <div class="content">
+            <h2>Have this scraped:</h2>
+            <div class="form-group">
+              <form>
+                <label class="form-label q-centre">Frequency</label>
+                <label class="form-radio q-centre">
+                  <input type="radio" v-model="frequency" value="daily" checked>
+                  <i class="form-icon"></i> Daily
+                </label>
+                <label class="form-radio q-centre">
+                  <input type="radio" v-model="frequency" value="weekly">
+                  <i class="form-icon"></i> Weekly
+                </label>
+              </form>
+              <button class="btn btn-primary" @click="scheduleRerun">Noice</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -67,7 +95,8 @@ export default {
   data() {
     return {
       showScheduler: false,
-      cronString: ''
+      rerunModalActive: false,
+      frequency: null
     }
   },
   components: {
@@ -115,15 +144,12 @@ export default {
       })
     },
     scheduleRerun(id) {
-      let cronString = prompt('enter cron string')
-      this.cronString = cronString
-      const self = this
-      axios.post('http://quarry-17.herokuapp.com/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
-//      axios.post('http://localhost:3000/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
-        cronString: cronString
+//      axios.post('http://quarry-17.herokuapp.com/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
+      axios.post('http://localhost:3000/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
+        freq: this.frequency
       })
       .then(function (response) {
-        console.log(response.data)
+        console.log(response)
       })
       .catch(function (error) {
         console.log(error)
