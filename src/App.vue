@@ -68,7 +68,6 @@ export default {
   methods: {
     getUser(event) {
       let getString = 'http://quarry-17.herokuapp.com/users/' + this.userIdInput
-      console.log(getString)
 //      let getString = 'http://localhost:3000/users/' + this.userIdInput
       axios.get(getString)
       .then((response)=> {

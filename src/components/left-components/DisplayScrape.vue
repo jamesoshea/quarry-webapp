@@ -78,6 +78,7 @@
                 </label>
               </form>
               <button id="rerun-submit" class="btn btn-primary" @click="scheduleRerun">Noice</button>
+              <p v-if="rerunErrorMessage">{{ rerunErrorMessage }}</p>
             </div>
           </div>
         </div>
@@ -93,8 +94,8 @@ import ExportFile from './ExportFile.vue'
 export default {
   data() {
     return {
-      showScheduler: false,
       rerunModalActive: false,
+      rerunErrorMessage: '',
       frequency: null
     }
   },
@@ -143,15 +144,19 @@ export default {
       })
     },
     scheduleRerun(id) {
+      const self = this
       axios.post('http://quarry-17.herokuapp.com/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
 //      axios.post('http://localhost:3000/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
         freq: this.frequency
       })
       .then(function (response) {
         console.log(response)
+        self.rerunModalActive = false
+        self.rerunErrorMessage = ''
       })
       .catch(function (error) {
         console.log(error)
+        self.rerunErrorMessage = 'There has been an error. Please try again.'
       })
     }
   }
