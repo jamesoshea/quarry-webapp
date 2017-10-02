@@ -4,8 +4,8 @@ module.exports = {
         "es6": true
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:vue/recommended"
+        'eslint:recommended',
+        'plugin:vue/recommended'
     ],
     "parserOptions": {
         "sourceType": "module"
@@ -26,10 +26,6 @@ module.exports = {
         "semi": [
             "error",
             "never"
-        ],
-        "plugins": [
-            "html"
         ]
-    },
-    
+    }
 };

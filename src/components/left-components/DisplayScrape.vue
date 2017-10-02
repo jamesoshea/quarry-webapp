@@ -92,74 +92,71 @@ import axios from 'axios'
 import ExportFile from './ExportFile.vue'
 
 export default {
-  data() {
-    return {
-      rerunModalActive: false,
-      rerunErrorMessage: '',
-      frequency: null
-    }
-  },
-  components: {
-    exportFile: ExportFile
-  },
-  computed: {
-    currentScrape() {
-      return this.$store.getters.currentScrape
-    },
-    scrapes() {
-      return this.$store.getters.scrapes
-    }
-  },
-  methods: {
-    deleteEmptyScrape() {
-      this.$store.commit('deleteScrape', this.currentScrape.id)
-    },
-    sortRows(dir, i) {
-      let result = []
-      result[0] = this.currentScrape.rows[0]
-      result[1] = this.currentScrape.rows[1]
-      let len = this.currentScrape.rows.length
-      let input = this.currentScrape.rows.slice(2, len)
-      let output = input.sort((a, b)=> {
-        if (dir === 'asc') {
-          return a[i].toLowerCase() - b[i].toLowerCase()
-        } else if (dir === 'desc') {
-          return b[i].toLowerCase() - a[i].toLowerCase()
-        }
-      })
-      for (var i = 0; i < output.length; i++) {
-        result[i + 2] = output[i]
-      }
-      this.currentScrape.rows = result
-    },
-    rerun(id) {
-      const self = this
-      axios.get('http://quarry-17.herokuapp.com/scrapes/rerun/' + this.$store.getters.userId + '/' + this.currentScrape.id)
-//      axios.get('http://localhost:3000/scrapes/rerun/' + this.$store.getters.userId + '/' + this.currentScrape.id)
-      .then(function (response) {
-        self.$store.commit('setScrapes', response.data)
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-    },
-    scheduleRerun(id) {
-      const self = this
-      axios.post('http://quarry-17.herokuapp.com/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
-//      axios.post('http://localhost:3000/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
-        freq: this.frequency
-      })
-      .then(function (response) {
-        console.log(response)
-        self.rerunModalActive = false
-        self.rerunErrorMessage = ''
-      })
-      .catch(function (error) {
-        console.log(error)
-        self.rerunErrorMessage = 'There has been an error. Please try again.'
-      })
-    }
-  }
+	data() {
+		return {
+			rerunModalActive: false,
+			rerunErrorMessage: '',
+			frequency: null
+		}
+	},
+	components: {
+		exportFile: ExportFile
+	},
+	computed: {
+		currentScrape() {
+			return this.$store.getters.currentScrape
+		},
+		scrapes() {
+			return this.$store.getters.scrapes
+		}
+	},
+	methods: {
+		deleteEmptyScrape() {
+			this.$store.commit('deleteScrape', this.currentScrape.id)
+		},
+		sortRows(dir, i) {
+			let result = []
+			result[0] = this.currentScrape.rows[0]
+			result[1] = this.currentScrape.rows[1]
+			let len = this.currentScrape.rows.length
+			let input = this.currentScrape.rows.slice(2, len)
+			let output = input.sort((a, b)=> {
+				if (dir === 'asc') {
+					return a[i].toLowerCase() - b[i].toLowerCase()
+				} else if (dir === 'desc') {
+					return b[i].toLowerCase() - a[i].toLowerCase()
+				}
+			})
+			for (let j = 0; j < output.length; j++) {
+				result[j + 2] = output[j]
+			}
+			this.currentScrape.rows = result
+		},
+		rerun() {
+			const self = this
+			axios.get('http://quarry-17.herokuapp.com/scrapes/rerun/' + this.$store.getters.userId + '/' + this.currentScrape.id)
+			//      axios.get('http://localhost:3000/scrapes/rerun/' + this.$store.getters.userId + '/' + this.currentScrape.id)
+				.then(function (response) {
+					self.$store.commit('setScrapes', response.data)
+				})
+				.catch(function () {
+				})
+		},
+		scheduleRerun() {
+			const self = this
+			axios.post('http://quarry-17.herokuapp.com/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
+				//      axios.post('http://localhost:3000/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
+				freq: this.frequency
+			})
+				.then(() => {
+					self.rerunModalActive = false
+					self.rerunErrorMessage = ''
+				})
+				.catch(() => {
+					self.rerunErrorMessage = 'There has been an error. Please try again.'
+				})
+		}
+	}
 }
 </script>
 

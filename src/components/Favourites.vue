@@ -17,27 +17,27 @@
 
 <script>
 export default {
-  computed: {
-    favourites() {
-      return this.$store.getters.scrapes.filter((scrape)=>{
-        return scrape.fav == true
-      })
-    },
-    scrapes() {
-      return this.$store.getters.scrapes
-    },
-    loggedIn() {
-      return this.$store.getters.loggedIn
-    }
-  },
-  methods: {
-    unFavourite(i) {
-      this.$store.commit('toggleScrapeFav', i)
-    },
-    findFav(id) {
-      this.$store.commit('setCurrentScrape', this.scrapes.find(x => x.id === id))
-    }
-  }
+	computed: {
+		favourites() {
+			return this.$store.getters.scrapes.filter((scrape)=>{
+				return scrape.fav == true
+			})
+		},
+		scrapes() {
+			return this.$store.getters.scrapes
+		},
+		loggedIn() {
+			return this.$store.getters.loggedIn
+		}
+	},
+	methods: {
+		unFavourite(i) {
+			this.$store.commit('toggleScrapeFav', i)
+		},
+		findFav(id) {
+			this.$store.commit('setCurrentScrape', this.scrapes.find(x => x.id === id))
+		}
+	}
 }
 </script>
 

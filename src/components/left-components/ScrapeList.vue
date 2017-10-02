@@ -40,36 +40,34 @@
 
 <script>
 
-import axios from 'axios'
-
 export default {
-  data() {
-    return {
-    }
-  },
-  computed: {
-    scrapes() {
-      return this.$store.getters.scrapes
-    }
-  },
-  methods: {
-    deleteScrape(i) {
-      this.$store.commit('deleteScrape', this.scrapes[i].id)
-    },
-    expandScrape(i) {
-      if (!this.$store.getters.currentScrape || this.$store.getters.currentScrape.id !== this.scrapes[i].id) {
-        this.$store.commit('setCurrentScrape', this.scrapes[i])
-      } else {
-        this.$store.commit('setCurrentScrape', null)
-      }
-    },
-    sortScrapes(dir) {
-      this.$store.commit('sortScrapes', dir)
-    },
-    toggleFavourite(i) {
-      this.$store.commit('toggleScrapeFav', i)
-    }
-  }
+	data() {
+		return {
+		}
+	},
+	computed: {
+		scrapes() {
+			return this.$store.getters.scrapes
+		}
+	},
+	methods: {
+		deleteScrape(i) {
+			this.$store.commit('deleteScrape', this.scrapes[i].id)
+		},
+		expandScrape(i) {
+			if (!this.$store.getters.currentScrape || this.$store.getters.currentScrape.id !== this.scrapes[i].id) {
+				this.$store.commit('setCurrentScrape', this.scrapes[i])
+			} else {
+				this.$store.commit('setCurrentScrape', null)
+			}
+		},
+		sortScrapes(dir) {
+			this.$store.commit('sortScrapes', dir)
+		},
+		toggleFavourite(i) {
+			this.$store.commit('toggleScrapeFav', i)
+		}
+	}
 }
 
 </script>

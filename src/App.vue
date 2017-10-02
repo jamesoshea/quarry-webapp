@@ -44,58 +44,57 @@ import Favourites from './components/Favourites.vue'
 import Footer from './components/Footer.vue'
 
 export default {
-  name: 'app',
-  components: {
-    'app-header': Header,
-    'left': Left,
-    'favourites': Favourites,
-    'app-footer': Footer
-  },
-  data() {
-    return {
-      userIdInput: '',
-      emptyUser: false
-    }
-  },
-  computed: {
-    scrapes() {
-      return this.$store.getters.scrapes
-    },
-    loggedIn() {
-      return this.$store.getters.loggedIn
-    }
-  },
-  methods: {
-    getUser(event) {
-      let getString = 'http://quarry-17.herokuapp.com/users/' + this.userIdInput
-//      let getString = 'http://localhost:3000/users/' + this.userIdInput
-      axios.get(getString)
-      .then((response)=> {
-        if (!response.data.hasOwnProperty('scrapes')) {
-          this.emptyUser = true
-        } else {
-          this.emptyUser = false
-          this.question = null
-          this.$store.commit('setScrapes', response.data.scrapes)
-          this.$store.commit('setUser', this.userIdInput)
-          localStorage.setItem('userId', this.userIdInput)
-          this.$store.commit('login')
-        }
-        if (response.data.hasOwnProperty('name')) {
-          this.$store.commit('setUsername', response.data.name)
-        }
-      })
-      .catch((error)=> {
-        console.log(error)
-        this.question = 'User not found'
-      })
-    }
-  },
-  beforeMount() {
-    if(localStorage.getItem('userId')) {
-      this.userIdInput = localStorage.getItem('userId')
-    }
-  }
+	name: 'app',
+	components: {
+		'app-header': Header,
+		'left': Left,
+		'favourites': Favourites,
+		'app-footer': Footer
+	},
+	data() {
+		return {
+			userIdInput: '',
+			emptyUser: false
+		}
+	},
+	computed: {
+		scrapes() {
+			return this.$store.getters.scrapes
+		},
+		loggedIn() {
+			return this.$store.getters.loggedIn
+		}
+	},
+	methods: {
+		getUser() {
+			let getString = 'http://quarry-17.herokuapp.com/users/' + this.userIdInput
+			//      let getString = 'http://localhost:3000/users/' + this.userIdInput
+			axios.get(getString)
+				.then((response)=> {
+					if (!response.data.hasOwnProperty('scrapes')) {
+						this.emptyUser = true
+					} else {
+						this.emptyUser = false
+						this.question = null
+						this.$store.commit('setScrapes', response.data.scrapes)
+						this.$store.commit('setUser', this.userIdInput)
+						localStorage.setItem('userId', this.userIdInput)
+						this.$store.commit('login')
+					}
+					if (response.data.hasOwnProperty('name')) {
+						this.$store.commit('setUsername', response.data.name)
+					}
+				})
+				.catch(()=> {
+					this.question = 'User not found'
+				})
+		}
+	},
+	beforeMount() {
+		if(localStorage.getItem('userId')) {
+			this.userIdInput = localStorage.getItem('userId')
+		}
+	}
 }
 </script>
 

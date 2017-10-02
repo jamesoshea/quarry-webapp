@@ -7,13 +7,13 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
-    state: {
-      loggedIn: false,
-      userId: '',
-      scrapes: [],
-      currentScrape: null,
-      username: ''
-    },
-    getters,
-    mutations
-});
+	state: {
+		loggedIn: false,
+		userId: '',
+		scrapes: [],
+		currentScrape: null,
+		username: ''
+	},
+	getters,
+	mutations
+})

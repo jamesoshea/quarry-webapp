@@ -53,40 +53,40 @@
 
 import axios from 'axios'
 export default {
-  data() {
-    return {
-      profileActive: false,
-      settingsActive: false,
-      nameInput: ''
-    }
-  },
-  computed: {
-    loggedIn() {
-      return this.$store.getters.loggedIn
-    },
-    userId() {
-      return this.$store.getters.userId
-    },
-    username() {
-      return this.$store.getters.username
-    },
-    scrapes() {
-      return this.$store.getters.scrapes
-    }
-  },
-  methods: {
-    logout() {
-      this.$store.commit('logout')
-    },
-    sendSettings() {
-      axios.post('http://quarry-17.herokuapp.com/users/' + this.userId + '/setName', {name: this.nameInput})
-//      axios.post('http://localhost:3000/users/' + this.userId + '/setName', {name: this.nameInput})
-        .then((response) => {
-          this.$store.commit('setUsername', this.nameInput)
-          this.settingsActive = false
-        })
-    }
-  }
+	data() {
+		return {
+			profileActive: false,
+			settingsActive: false,
+			nameInput: ''
+		}
+	},
+	computed: {
+		loggedIn() {
+			return this.$store.getters.loggedIn
+		},
+		userId() {
+			return this.$store.getters.userId
+		},
+		username() {
+			return this.$store.getters.username
+		},
+		scrapes() {
+			return this.$store.getters.scrapes
+		}
+	},
+	methods: {
+		logout() {
+			this.$store.commit('logout')
+		},
+		sendSettings() {
+			axios.post('http://quarry-17.herokuapp.com/users/' + this.userId + '/setName', {name: this.nameInput})
+			//      axios.post('http://localhost:3000/users/' + this.userId + '/setName', {name: this.nameInput})
+				.then(() => {
+					this.$store.commit('setUsername', this.nameInput)
+					this.settingsActive = false
+				})
+		}
+	}
 }
 </script>
 

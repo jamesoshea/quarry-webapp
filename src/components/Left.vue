@@ -11,10 +11,10 @@ import DisplayScrape from './left-components/DisplayScrape.vue'
 import ScrapeList from './left-components/ScrapeList.vue'
 
 export default {
-  components: {
-    'scrape-list': ScrapeList,
-    'display-scrape': DisplayScrape
-  }
+	components: {
+		'scrape-list': ScrapeList,
+		'display-scrape': DisplayScrape
+	}
 }
 </script>
 
