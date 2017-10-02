@@ -9,22 +9,22 @@ import Left from './components/Left.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', component: Left }
+	{ path: '/', component: Left }
 ]
 
 const router = new VueRouter({
-  routes,
-  mode: 'history'
+	routes,
+	mode: 'history'
 })
 
 new Vue({
-  el: '#app',
-  router,
-  store,
-  render: h => h(App),
-  beforeMount() {
-    if (localStorage.getItem('userId')) {
-      store.commit('setUser', localStorage.getItem('userId'))
-    }
-  }
+	el: '#app',
+	router,
+	store,
+	render: h => h(App),
+	beforeMount() {
+		if (localStorage.getItem('userId')) {
+			store.commit('setUser', localStorage.getItem('userId'))
+		}
+	}
 })
