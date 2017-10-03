@@ -122,9 +122,9 @@ export default {
 			let input = this.currentScrape.rows.slice(2, len)
 			let output = input.sort((a, b)=> {
 				if (dir === 'asc') {
-					return a[i].toLowerCase() - b[i].toLowerCase()
+					if (a[i] && b[i]) return a[i].toLowerCase() > b[i].toLowerCase() ? -1 : 1
 				} else if (dir === 'desc') {
-					return b[i].toLowerCase() - a[i].toLowerCase()
+					if (a[i] && b[i]) return a[i].toLowerCase() < b[i].toLowerCase() ? -1 : 1
 				}
 			})
 			for (let j = 0; j < output.length; j++) {
