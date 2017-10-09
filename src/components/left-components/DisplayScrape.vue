@@ -134,7 +134,7 @@ export default {
 		},
 		rerun() {
 			const self = this
-			axios.get('http://quarry-17.herokuapp.com/scrapes/rerun/' + this.$store.getters.userId + '/' + this.currentScrape.id)
+			axios.get('https://quarry-17.herokuapp.com/scrapes/rerun/' + this.$store.getters.userId + '/' + this.currentScrape.id)
 			//      axios.get('http://localhost:3000/scrapes/rerun/' + this.$store.getters.userId + '/' + this.currentScrape.id)
 				.then(function (response) {
 					self.$store.commit('setScrapes', response.data)
@@ -144,7 +144,7 @@ export default {
 		},
 		scheduleRerun() {
 			const self = this
-			axios.post('http://quarry-17.herokuapp.com/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
+			axios.post('https://quarry-17.herokuapp.com/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
 				//      axios.post('http://localhost:3000/scrapes/scheduleRerun/' + this.$store.getters.userId + '/' + this.currentScrape.id, {
 				freq: this.frequency
 			})

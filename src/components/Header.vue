@@ -1,15 +1,17 @@
 <template lang="html">
-  <div class="columns q-header">
-    <div class="column col-7">
-      <h1 id="q-main-msg">Quarry</h1>
-    </div>
-    <div v-if="loggedIn" class="column col-5 q-logout">
-      <button class="btn"
-            @click="logout">
-            <i class="icon icon-shutdown"></i> Logout
-      </button>
-      <button class="btn " @click="settingsActive = true"><i class="icon icon-edit"></i> Settings</button>
-      <button class="btn btn-primary" @click="profileActive = true"><i class="icon icon-people"></i> View Profile</button>
+  <div class="container">
+    <div class="columns q-header">
+      <div class="column col-3">
+        <h1>Quarry</h1>
+      </div>
+      <div v-if="loggedIn" class="column col-9 q-logout">
+        <button class="btn"
+              @click="logout">
+              <i class="icon icon-shutdown"></i> Logout
+        </button>
+        <button class="btn " @click="settingsActive = true"><i class="icon icon-edit"></i> Settings</button>
+        <button class="btn btn-primary" @click="profileActive = true"><i class="icon icon-people"></i> View Profile</button>
+      </div>
     </div>
     <div :class="{active: profileActive}" class="modal">
       <div class="modal-overlay"></div>
@@ -79,7 +81,7 @@ export default {
 			this.$store.commit('logout')
 		},
 		sendSettings() {
-			axios.post('http://quarry-17.herokuapp.com/users/' + this.userId + '/setName', {name: this.nameInput})
+			axios.post('https://quarry-17.herokuapp.com/users/' + this.userId + '/setName', {name: this.nameInput})
 			//      axios.post('http://localhost:3000/users/' + this.userId + '/setName', {name: this.nameInput})
 				.then(() => {
 					this.$store.commit('setUsername', this.nameInput)

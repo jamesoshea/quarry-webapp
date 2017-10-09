@@ -11,6 +11,10 @@
               v-on:keyup.enter="getUser"
               autofocus>
     </div>
+		<div class="q-centre" v-if="!loggedIn">
+			Don't have the chrome extension yet?
+			<a href="https://chrome.google.com/webstore/detail/quarry/jkgbmaenkkenaipebbdnlhkijkiaonel">Get it here.</a>
+		</div>
     <div v-if="emptyUser">
       <div class="empty">
         <div class="empty-icon">
@@ -67,7 +71,7 @@ export default {
 	},
 	methods: {
 		getUser() {
-			let getString = 'http://quarry-17.herokuapp.com/users/' + this.userIdInput
+			let getString = 'https://quarry-17.herokuapp.com/users/' + this.userIdInput
 			//      let getString = 'http://localhost:3000/users/' + this.userIdInput
 			axios.get(getString)
 				.then((response)=> {

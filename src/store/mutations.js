@@ -3,7 +3,7 @@ import axios from 'axios'
 export default {
 	deleteScrape(state, id) {
 		//    let getString = 'http://localhost:3000/scrapes/delete/' + state.userId + '/' + id
-		let getString = 'http://quarry-17.herokuapp.com/scrapes/delete/' + state.userId + '/' + id
+		let getString = 'https://quarry-17.herokuapp.com/scrapes/delete/' + state.userId + '/' + id
 		axios.post(getString)
 			.then((response) => {
 				state.scrapes = scrapeFormatter(response.data)
@@ -47,7 +47,7 @@ export default {
 			key: state.scrapes[i].id,
 			bool: !state.scrapes[i].fav
 		}
-		axios.post('http://quarry-17.herokuapp.com/scrapes/' + state.userId + '/setFav', options)
+		axios.post('https://quarry-17.herokuapp.com/scrapes/' + state.userId + '/setFav', options)
 		//    axios.post('http://localhost:3000/scrapes/' + state.userId + '/setFav', options)
 			.then(()=> {
 				state.scrapes[i].fav = !state.scrapes[i].fav
